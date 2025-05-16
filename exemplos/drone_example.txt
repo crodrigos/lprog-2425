@@ -1,47 +1,15 @@
-SN:D-R0DR1G05;
-CC:20000g;
-AT:60;
-VC:20;
-VS:5;
-VD:5;
-SS:[GPS,CAM];
-LO:["Máximo de horas de voo", "Hélice esquerda não funciona bem"];
-RT:["Vira mal para a esquerda", "Não tem GPS funcional"];
-TV:1200;
-EA:CHRG;
+drone: {
+    SN:D-R0DR1G05;
+    TV:1200;
+    MD: FX-001;
+    RT:["Vira mal para a esquerda", "Não tem GPS funcional"];
+    EA:CHRG;
+}
 
-SN:D-A1PH4B37;
-CC:5000g;
-AT:45;
-VC:25;
-VS:6;
-VD:4;
-SS:[GPS,CAM,TERMAL];
-LO:["Máximo de altitude: 3000m", "Temperatura máxima de operação: 45°C"];
-RT:["Voo apenas em áreas autorizadas", "Não operar em chuva"];
-TV:850;
-EA:IDLE;
-
-SN:D-B3T0X900;
-CC:15000g;
-AT:75;
-VC:30;
-VS:7;
-VD:6;
-SS:[GPS,LIDAR,CAM];
-LO:["Tempo máximo de voo: 75min", "Autonomia reduzida em altitude"];
-RT:["Sem voo noturno", "Evitar zonas com interferência eletromagnética"];
-TV:320;
-EA:FLYN;
-
-SN:D-C4R0L1N4;
-CC:10000g;
-AT:50;
-VC:18;
-VS:4;
-VD:4;
-SS:[CAM,TERMAL];
-LO:["Limite de vento: 30km/h", "Hélices devem ser verificadas a cada 100h"];
-RT:["Precisa de autorização para voar em áreas urbanas"];
-TV:1080;
-EA:MNTC;
+drone: {
+    SN:D-A1PH4B37;
+    MD: FX-001;
+    RT:["Voo apenas em áreas autorizadas", "Não operar em chuva"];
+    TV:850
+    EA:IDLE;
+}
