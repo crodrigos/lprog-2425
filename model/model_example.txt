@@ -10,12 +10,12 @@ model:{
 }
 
 model:{
-    NM:FX-001;
-    CC:20000;
-    AT:60;
-    VC:20;
-    VS:5;
-    VD:5;
-    SS:[GPS,CAM];
+    NM:FX-002;
+    CC:25000;
+    AT:30;
+    VC:15;
+    VS:7;
+    VD:7;
+    SS:[CAM,BLUETOOTH];
     LO:["Máximo de horas de voo"];
 }

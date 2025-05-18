@@ -92,7 +92,7 @@ void printModel(const Model_t *model) {
         return;
     }
 
-    printf("\n\n=== Model ===\n");
+    printf("\n=== Model ===\n");
     printf("Name: %s\n", model->name);
     printf("Cargo Capacity: %d\n", model->cargoCapacity);
     printf("Autonomy: %d\n", model->autonomy);
@@ -113,11 +113,12 @@ void printModel(const Model_t *model) {
             printf("  - %s\n", model->operationalLimitations[i]);
         }
     }
+    printf("\n");
 }
 
 
 
-#line 121 "model.tab.c"
+#line 122 "model.tab.c"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -561,8 +562,8 @@ static const yytype_int8 yytranslate[] =
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    70,    70,    71,    75,    82,    83,    86,    89,    92,
-      95,    98,   101,   104,   116,   128,   134,   135,   139,   144
+       0,    71,    71,    72,    76,    83,    84,    87,    90,    93,
+      96,    99,   102,   105,   117,   129,   135,   136,   140,   145
 };
 #endif
 
@@ -1414,76 +1415,76 @@ yyreduce:
   switch (yyn)
     {
   case 4: /* structure: MODEL ':' '{' structureBody '}'  */
-#line 75 "model.y"
+#line 76 "model.y"
                                     {
         //printf("Model structure created\n");
         printModel(model);
     }
-#line 1423 "model.tab.c"
+#line 1424 "model.tab.c"
     break;
 
   case 5: /* structureBody: structureBody keyValuePair ';'  */
-#line 82 "model.y"
+#line 83 "model.y"
                                     {}
-#line 1429 "model.tab.c"
+#line 1430 "model.tab.c"
     break;
 
   case 6: /* structureBody: keyValuePair ';'  */
-#line 83 "model.y"
+#line 84 "model.y"
                        {}
-#line 1435 "model.tab.c"
+#line 1436 "model.tab.c"
     break;
 
   case 7: /* keyValuePair: NM ':' ALPHANUMERIC  */
-#line 86 "model.y"
+#line 87 "model.y"
                         {
         model->name = strdup((yyvsp[0].sval));
     }
-#line 1443 "model.tab.c"
+#line 1444 "model.tab.c"
     break;
 
   case 8: /* keyValuePair: CC ':' NUMBER  */
-#line 89 "model.y"
+#line 90 "model.y"
                     {
         model->cargoCapacity = (yyvsp[0].ival);
     }
-#line 1451 "model.tab.c"
+#line 1452 "model.tab.c"
     break;
 
   case 9: /* keyValuePair: AT ':' NUMBER  */
-#line 92 "model.y"
+#line 93 "model.y"
                     {
         model->autonomy = (yyvsp[0].ival);
     }
-#line 1459 "model.tab.c"
+#line 1460 "model.tab.c"
     break;
 
   case 10: /* keyValuePair: VC ':' NUMBER  */
-#line 95 "model.y"
+#line 96 "model.y"
                     {
         model->crusingVelocity = (yyvsp[0].ival);
     }
-#line 1467 "model.tab.c"
+#line 1468 "model.tab.c"
     break;
 
   case 11: /* keyValuePair: VS ':' NUMBER  */
-#line 98 "model.y"
+#line 99 "model.y"
                     {
         model->liftingVelocity = (yyvsp[0].ival);
     }
-#line 1475 "model.tab.c"
+#line 1476 "model.tab.c"
     break;
 
   case 12: /* keyValuePair: VD ':' NUMBER  */
-#line 101 "model.y"
+#line 102 "model.y"
                     {
         model->landingVelocity = (yyvsp[0].ival);
     }
-#line 1483 "model.tab.c"
+#line 1484 "model.tab.c"
     break;
 
   case 13: /* keyValuePair: SS ':' LIST  */
-#line 104 "model.y"
+#line 105 "model.y"
                   {
         currentListType = SENSOR_LIST;
         for (int i = 0; i < currentListIndex && i < maxSensorsNumber; i++) {
@@ -1496,11 +1497,11 @@ yyreduce:
         currentListIndex = 0;
         currentListType = NONE;
     }
-#line 1500 "model.tab.c"
+#line 1501 "model.tab.c"
     break;
 
   case 14: /* keyValuePair: LO ':' LIST  */
-#line 116 "model.y"
+#line 117 "model.y"
                   {
         currentListType = LIMITATION_LIST;
         for (int i = 0; i < currentListIndex && i < nOperationalLimitations; i++) {
@@ -1510,39 +1511,39 @@ yyreduce:
         currentListIndex = 0;
         currentListType = NONE;
     }
-#line 1514 "model.tab.c"
+#line 1515 "model.tab.c"
     break;
 
   case 15: /* LIST: '[' LISTBODY ']'  */
-#line 128 "model.y"
+#line 129 "model.y"
                      {
         //printf("List created with %d items\n", currentListIndex);
     }
-#line 1522 "model.tab.c"
+#line 1523 "model.tab.c"
     break;
 
   case 18: /* VALUE: ALPHANUMERIC  */
-#line 139 "model.y"
+#line 140 "model.y"
                  {
         if (currentListIndex < nOperationalLimitations) {
             listBuffer[currentListIndex++] = strdup((yyvsp[0].sval));
         }
     }
-#line 1532 "model.tab.c"
+#line 1533 "model.tab.c"
     break;
 
   case 19: /* VALUE: STRING  */
-#line 144 "model.y"
+#line 145 "model.y"
              {
         if (currentListIndex < nOperationalLimitations) {
             listBuffer[currentListIndex++] = strdup((yyvsp[0].sval));
         }
     }
-#line 1542 "model.tab.c"
+#line 1543 "model.tab.c"
     break;
 
 
-#line 1546 "model.tab.c"
+#line 1547 "model.tab.c"
 
       default: break;
     }
@@ -1766,7 +1767,7 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 152 "model.y"
+#line 153 "model.y"
 
 
 int main() {

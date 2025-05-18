@@ -24,7 +24,7 @@ void printModel(const Model_t *model) {
         return;
     }
 
-    printf("\n\n=== Model ===\n");
+    printf("\n=== Model ===\n");
     printf("Name: %s\n", model->name);
     printf("Cargo Capacity: %d\n", model->cargoCapacity);
     printf("Autonomy: %d\n", model->autonomy);
@@ -45,6 +45,7 @@ void printModel(const Model_t *model) {
             printf("  - %s\n", model->operationalLimitations[i]);
         }
     }
+    printf("\n");
 }
 
 
