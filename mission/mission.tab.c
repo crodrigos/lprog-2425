@@ -154,13 +154,14 @@ enum yysymbol_kind_t
   YYSYMBOL_18_ = 18,                       /* ')'  */
   YYSYMBOL_YYACCEPT = 19,                  /* $accept  */
   YYSYMBOL_input = 20,                     /* input  */
-  YYSYMBOL_mission_body = 21,              /* mission_body  */
-  YYSYMBOL_stt_line = 22,                  /* stt_line  */
-  YYSYMBOL_md_line = 23,                   /* md_line  */
-  YYSYMBOL_stp_line = 24,                  /* stp_line  */
-  YYSYMBOL_deliveries_line = 25,           /* deliveries_line  */
-  YYSYMBOL_delivery_list = 26,             /* delivery_list  */
-  YYSYMBOL_point = 27                      /* point  */
+  YYSYMBOL_mission_block = 21,             /* mission_block  */
+  YYSYMBOL_mission_body = 22,              /* mission_body  */
+  YYSYMBOL_stt_line = 23,                  /* stt_line  */
+  YYSYMBOL_md_line = 24,                   /* md_line  */
+  YYSYMBOL_stp_line = 25,                  /* stp_line  */
+  YYSYMBOL_deliveries_line = 26,           /* deliveries_line  */
+  YYSYMBOL_delivery_list = 27,             /* delivery_list  */
+  YYSYMBOL_point = 28                      /* point  */
 };
 typedef enum yysymbol_kind_t yysymbol_kind_t;
 
@@ -486,18 +487,18 @@ union yyalloc
 #endif /* !YYCOPY_NEEDED */
 
 /* YYFINAL -- State number of the termination state.  */
-#define YYFINAL  4
+#define YYFINAL  2
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   39
+#define YYLAST   37
 
 /* YYNTOKENS -- Number of terminals.  */
 #define YYNTOKENS  19
 /* YYNNTS -- Number of nonterminals.  */
-#define YYNNTS  9
+#define YYNNTS  10
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  10
+#define YYNRULES  12
 /* YYNSTATES -- Number of states.  */
-#define YYNSTATES  44
+#define YYNSTATES  45
 
 /* YYMAXUTOK -- Last valid token kind.  */
 #define YYMAXUTOK   266
@@ -547,8 +548,8 @@ static const yytype_int8 yytranslate[] =
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int8 yyrline[] =
 {
-       0,    63,    63,    69,    77,    81,    85,    89,    93,    98,
-     107
+       0,    62,    62,    64,    68,    76,    84,    88,    92,    96,
+     100,   105,   114
 };
 #endif
 
@@ -566,9 +567,9 @@ static const char *const yytname[] =
 {
   "\"end of file\"", "error", "\"invalid token\"", "DATE", "MODEL",
   "NUMBER", "MISSION", "STT", "MD", "STP", "DELIVERIES", "P", "':'", "','",
-  "';'", "'{'", "'}'", "'('", "')'", "$accept", "input", "mission_body",
-  "stt_line", "md_line", "stp_line", "deliveries_line", "delivery_list",
-  "point", YY_NULLPTR
+  "';'", "'{'", "'}'", "'('", "')'", "$accept", "input", "mission_block",
+  "mission_body", "stt_line", "md_line", "stp_line", "deliveries_line",
+  "delivery_list", "point", YY_NULLPTR
 };
 
 static const char *
@@ -578,7 +579,7 @@ yysymbol_name (yysymbol_kind_t yysymbol)
 }
 #endif
 
-#define YYPACT_NINF (-33)
+#define YYPACT_NINF (-32)
 
 #define yypact_value_is_default(Yyn) \
   ((Yyn) == YYPACT_NINF)
@@ -592,11 +593,11 @@ yysymbol_name (yysymbol_kind_t yysymbol)
    STATE-NUM.  */
 static const yytype_int8 yypact[] =
 {
-      -4,    -9,     4,    -8,   -33,     1,    -3,    -6,     3,     9,
-     -33,     2,     6,    -1,    12,     5,     8,   -33,     7,    10,
-      11,   -33,   -33,    14,    15,    13,    17,   -33,    20,    19,
-      21,   -11,    22,    10,    24,   -33,    27,    23,    10,    16,
-     -33,    25,   -33,   -33
+     -32,     0,   -32,   -11,   -32,   -10,    -3,    -2,    -7,     3,
+       9,   -32,     1,     5,     2,    11,     6,     7,   -32,     8,
+       4,    12,   -32,   -32,    14,    13,    10,    15,   -32,    18,
+      21,    19,    -9,    17,     4,    20,   -32,    28,    22,     4,
+      16,   -32,    23,   -32,   -32
 };
 
 /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
@@ -604,23 +605,23 @@ static const yytype_int8 yypact[] =
    means the default is an error.  */
 static const yytype_int8 yydefact[] =
 {
-       0,     0,     0,     0,     1,     0,     0,     0,     0,     0,
-       2,     0,     0,     0,     0,     0,     0,     4,     0,     0,
-       0,     3,     5,     0,     0,     0,     0,     6,     0,     0,
-       0,     0,     0,     0,     0,     7,     0,     0,     0,     0,
-       9,     0,    10,     8
+       2,     0,     1,     0,     3,     0,     0,     0,     0,     0,
+       0,     4,     0,     0,     0,     0,     0,     0,     6,     0,
+       0,     0,     5,     7,     0,     0,     0,     0,     8,     0,
+       0,     0,     0,     0,     0,     0,     9,     0,     0,     0,
+       0,    11,     0,    12,    10
 };
 
 /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int8 yypgoto[] =
 {
-     -33,   -33,   -33,   -33,   -33,   -33,   -33,   -33,   -32
+     -32,   -32,   -32,   -32,   -32,   -32,   -32,   -32,   -32,   -31
 };
 
 /* YYDEFGOTO[NTERM-NUM].  */
 static const yytype_int8 yydefgoto[] =
 {
-       0,     2,     7,     8,    12,    16,    21,    31,    24
+       0,     1,     4,     8,     9,    13,    17,    22,    32,    25
 };
 
 /* YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
@@ -628,43 +629,43 @@ static const yytype_int8 yydefgoto[] =
    number is the opposite.  If YYTABLE_NINF, syntax error.  */
 static const yytype_int8 yytable[] =
 {
-      34,    37,     1,     3,     4,    35,    41,     5,     6,     9,
-      10,    11,    13,    17,    14,    15,    18,    19,    20,    26,
-       0,    22,     0,    25,    32,     0,     0,    23,    28,    27,
-      29,    30,    39,    33,    42,    36,    38,    40,     0,    43
+       2,     5,    35,    38,     7,     6,     3,    36,    42,    11,
+      10,    12,    14,    15,    16,    19,    18,    21,    20,    27,
+       0,    24,    23,     0,    26,    29,    33,    28,    30,    31,
+      37,    34,    39,    40,    43,     0,    41,    44
 };
 
 static const yytype_int8 yycheck[] =
 {
-      11,    33,     6,    12,     0,    16,    38,    15,     7,    12,
-      16,     8,     3,    14,    12,     9,     4,    12,    10,     5,
-      -1,    14,    -1,    12,     5,    -1,    -1,    17,    15,    14,
-      13,    11,     5,    12,    18,    13,    12,    14,    -1,    14
+       0,    12,    11,    34,     7,    15,     6,    16,    39,    16,
+      12,     8,     3,    12,     9,     4,    14,    10,    12,     5,
+      -1,    17,    14,    -1,    12,    15,     5,    14,    13,    11,
+      13,    12,    12,     5,    18,    -1,    14,    14
 };
 
 /* YYSTOS[STATE-NUM] -- The symbol kind of the accessing symbol of
    state STATE-NUM.  */
 static const yytype_int8 yystos[] =
 {
-       0,     6,    20,    12,     0,    15,     7,    21,    22,    12,
-      16,     8,    23,     3,    12,     9,    24,    14,     4,    12,
-      10,    25,    14,    17,    27,    12,     5,    14,    15,    13,
-      11,    26,     5,    12,    11,    16,    13,    27,    12,     5,
-      14,    27,    18,    14
+       0,    20,     0,     6,    21,    12,    15,     7,    22,    23,
+      12,    16,     8,    24,     3,    12,     9,    25,    14,     4,
+      12,    10,    26,    14,    17,    28,    12,     5,    14,    15,
+      13,    11,    27,     5,    12,    11,    16,    13,    28,    12,
+       5,    14,    28,    18,    14
 };
 
 /* YYR1[RULE-NUM] -- Symbol kind of the left-hand side of rule RULE-NUM.  */
 static const yytype_int8 yyr1[] =
 {
-       0,    19,    20,    21,    22,    23,    24,    25,    26,    26,
-      27
+       0,    19,    20,    20,    21,    22,    23,    24,    25,    26,
+      27,    27,    28
 };
 
 /* YYR2[RULE-NUM] -- Number of symbols on the right-hand side of rule RULE-NUM.  */
 static const yytype_int8 yyr2[] =
 {
-       0,     2,     5,     4,     4,     4,     4,     5,     5,     4,
-       7
+       0,     2,     0,     2,     5,     4,     4,     4,     4,     5,
+       5,     4,     7
 };
 
 
@@ -1127,73 +1128,75 @@ yyreduce:
   YY_REDUCE_PRINT (yyn);
   switch (yyn)
     {
-  case 2: /* input: MISSION ':' '{' mission_body '}'  */
-#line 63 "mission.y"
+  case 4: /* mission_block: MISSION ':' '{' mission_body '}'  */
+#line 68 "mission.y"
                                      {
         printMission(mission);
+        free(mission);                     // Clean up after each mission
+        mission = (Mission_t *)malloc(sizeof(Mission_t));  // Allocate new mission
     }
-#line 1136 "mission.tab.c"
+#line 1139 "mission.tab.c"
     break;
 
-  case 3: /* mission_body: stt_line md_line stp_line deliveries_line  */
-#line 69 "mission.y"
+  case 5: /* mission_body: stt_line md_line stp_line deliveries_line  */
+#line 76 "mission.y"
                                               {
         mission->startDate = strdup((yyvsp[-3].sval));
         mission->model = strdup((yyvsp[-2].sval));
         mission->startPoint = (yyvsp[-1].point);
     }
-#line 1146 "mission.tab.c"
+#line 1149 "mission.tab.c"
     break;
 
-  case 4: /* stt_line: STT ':' DATE ';'  */
-#line 77 "mission.y"
+  case 6: /* stt_line: STT ':' DATE ';'  */
+#line 84 "mission.y"
                      { (yyval.sval) = (yyvsp[-1].sval); }
-#line 1152 "mission.tab.c"
+#line 1155 "mission.tab.c"
     break;
 
-  case 5: /* md_line: MD ':' MODEL ';'  */
-#line 81 "mission.y"
+  case 7: /* md_line: MD ':' MODEL ';'  */
+#line 88 "mission.y"
                      { (yyval.sval) = (yyvsp[-1].sval); }
-#line 1158 "mission.tab.c"
+#line 1161 "mission.tab.c"
     break;
 
-  case 6: /* stp_line: STP ':' point ';'  */
-#line 85 "mission.y"
+  case 8: /* stp_line: STP ':' point ';'  */
+#line 92 "mission.y"
                       { (yyval.point) = (yyvsp[-1].point); }
-#line 1164 "mission.tab.c"
+#line 1167 "mission.tab.c"
     break;
 
-  case 8: /* delivery_list: delivery_list P ':' point ';'  */
-#line 93 "mission.y"
+  case 10: /* delivery_list: delivery_list P ':' point ';'  */
+#line 100 "mission.y"
                                   {
         if (mission->deliveryCount < MAX_DELIVERIES) {
             mission->deliveries[mission->deliveryCount++] = (yyvsp[-1].point);
         }
     }
-#line 1174 "mission.tab.c"
+#line 1177 "mission.tab.c"
     break;
 
-  case 9: /* delivery_list: P ':' point ';'  */
-#line 98 "mission.y"
+  case 11: /* delivery_list: P ':' point ';'  */
+#line 105 "mission.y"
                       {
         mission->deliveryCount = 0;
         if (mission->deliveryCount < MAX_DELIVERIES) {
             mission->deliveries[mission->deliveryCount++] = (yyvsp[-1].point);
         }
     }
-#line 1185 "mission.tab.c"
+#line 1188 "mission.tab.c"
     break;
 
-  case 10: /* point: '(' NUMBER ',' NUMBER ',' NUMBER ')'  */
-#line 107 "mission.y"
+  case 12: /* point: '(' NUMBER ',' NUMBER ',' NUMBER ')'  */
+#line 114 "mission.y"
                                          {
         (yyval.point) = (Point_t){ (yyvsp[-5].ival), (yyvsp[-3].ival), (yyvsp[-1].ival) };
     }
-#line 1193 "mission.tab.c"
+#line 1196 "mission.tab.c"
     break;
 
 
-#line 1197 "mission.tab.c"
+#line 1200 "mission.tab.c"
 
       default: break;
     }
@@ -1386,7 +1389,7 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 112 "mission.y"
+#line 119 "mission.y"
 
 
 int main() {

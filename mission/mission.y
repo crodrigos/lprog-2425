@@ -60,8 +60,15 @@ void printMission(const Mission_t *mission) {
 %%
 
 input:
+    /* empty */
+    | input mission_block
+;
+
+mission_block:
     MISSION ':' '{' mission_body '}' {
         printMission(mission);
+        free(mission);                     // Clean up after each mission
+        mission = (Mission_t *)malloc(sizeof(Mission_t));  // Allocate new mission
     }
 ;
 
