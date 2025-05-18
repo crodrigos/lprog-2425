@@ -1,9 +1,12 @@
+%code requires {
+  #include "point.h"
+}
+
 %{
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "mission.h"
-#include "point.h"
 
 Mission_t *mission;
 
@@ -48,11 +51,13 @@ void printMission(const Mission_t *mission) {
 %token <ival> NUMBER
 %token MISSION STT MD STP DELIVERIES P
 %token ':' ',' ';' '{' '}' '(' ')'
-%type <point> point
+
+// Declare the return types of new nonterminals
+%type <sval> stt_line md_line
+%type <point> stp_line point
+%type deliveries_line delivery_list
 
 %%
-
-// Regras da gramática
 
 input:
     MISSION ':' '{' mission_body '}' {
@@ -61,23 +66,36 @@ input:
 ;
 
 mission_body:
-    STT ':' DATE
-    MD ':' MODEL ';'
-    STP ':' point
-    DELIVERIES ':' '{' delivery_list '}' {
-        mission->startDate = strdup($3);
-        mission->model = strdup($6);
-        mission->startPoint = $10;
+    stt_line md_line stp_line deliveries_line {
+        mission->startDate = strdup($1);
+        mission->model = strdup($2);
+        mission->startPoint = $3;
     }
 ;
 
+stt_line:
+    STT ':' DATE ';' { $$ = $3; }
+;
+
+md_line:
+    MD ':' MODEL ';' { $$ = $3; }
+;
+
+stp_line:
+    STP ':' point ';' { $$ = $3; }
+;
+
+deliveries_line:
+    DELIVERIES ':' '{' delivery_list '}' 
+;
+
 delivery_list:
-    delivery_list P ':' point {
+    delivery_list P ':' point ';' {
         if (mission->deliveryCount < MAX_DELIVERIES) {
             mission->deliveries[mission->deliveryCount++] = $4;
         }
     }
-    | P ':' point {
+    | P ':' point ';' {
         mission->deliveryCount = 0;
         if (mission->deliveryCount < MAX_DELIVERIES) {
             mission->deliveries[mission->deliveryCount++] = $3;

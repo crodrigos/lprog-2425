@@ -14,6 +14,6 @@ runex: parser
 	./parser < mission_example.txt
 
 clean:
-	rm -f parser.exe mission.tab.c mission.tab.h lex.yy.c
+	rm -f parser mission.tab.c mission.tab.h lex.yy.c
 	rm -f *.o
 	dir -ls

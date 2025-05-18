@@ -44,6 +44,12 @@
 #if YYDEBUG
 extern int yydebug;
 #endif
+/* "%code requires" blocks.  */
+#line 1 "mission.y"
+
+  #include "point.h"
+
+#line 53 "mission.tab.h"
 
 /* Token kinds.  */
 #ifndef YYTOKENTYPE
@@ -71,13 +77,13 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 40 "mission.y"
+#line 43 "mission.y"
 
     int ival;
     char* sval;
     Point_t point;
 
-#line 81 "mission.tab.h"
+#line 87 "mission.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;
