@@ -1,0 +1,21 @@
+model:{
+    NM:FX-001;
+    CC:20000;
+    AT:60;
+    VC:20;
+    VS:5;
+    VD:5;
+    SS:[GPS,CAM];
+    LO:["Máximo de horas de voo"];
+}
+
+model:{
+    NM:FX-001;
+    CC:20000;
+    AT:60;
+    VC:20;
+    VS:5;
+    VD:5;
+    SS:[GPS,CAM];
+    LO:["Máximo de horas de voo"];
+}
