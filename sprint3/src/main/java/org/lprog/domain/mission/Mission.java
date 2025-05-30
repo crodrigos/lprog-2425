@@ -1,18 +1,20 @@
 package org.lprog.domain.mission;
 
+import org.lprog.domain.model.Model;
+
 import java.util.Date;
 import java.util.List;
 
 public class Mission {
 
     public Date startDate;
-    public String Model;
+    public Model model;
     public Point StartingPoint;
     public List<Point> deliveries;
 
-    public Mission(Date startDate, String model, Point startingPoint, List<Point> deliveries) {
+    public Mission(Date startDate, Model model, Point startingPoint, List<Point> deliveries) {
         this.startDate = startDate;
-        this.Model = model;
+        this.model = model;
         this.StartingPoint = startingPoint;
         this.deliveries = deliveries;
     }
