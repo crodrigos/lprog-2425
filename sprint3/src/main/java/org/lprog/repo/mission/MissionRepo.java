@@ -12,11 +12,13 @@ public class MissionRepo implements IRepo<Mission> {
     @Override
     public void add(Mission obj) {
         missions.add(obj);
+        System.out.println("Mission added: " + obj);
     }
 
     @Override
     public void remove(Mission obj) {
         missions.remove(obj);
+        System.out.println("Mission removed: " + obj);
     }
 
     @Override
