@@ -1,8 +1,12 @@
 package org.lprog;
 
+import org.lprog.repo.RepoStore;
+
 public class App {
 
     private static App instance;
+
+    public final RepoStore Repos = new RepoStore();
 
     private App() {
     }
