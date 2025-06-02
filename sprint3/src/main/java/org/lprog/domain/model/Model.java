@@ -33,4 +33,17 @@ public class Model {
         this.operationalLimits = operationalLimits;
     }
 
+    @Override
+    public String toString() {
+        return "Model{" +
+                "ModelName='" + ModelName + '\'' +
+                ", CargoCapacity=" + CargoCapacity +
+                ", Autonomy=" + Autonomy +
+                ", CruisingVelocity=" + CruisingVelocity +
+                ", LiftingVelocity=" + LiftingVelocity +
+                ", LandingVelocity=" + LandingVelocity +
+                ", sensors=" + sensors +
+                ", operationalLimits=" + operationalLimits +
+                '}';
+    }
 }

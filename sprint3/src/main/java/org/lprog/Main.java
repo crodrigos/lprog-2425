@@ -1,6 +1,8 @@
  package org.lprog;
 
-public class Main {
+ import org.lprog.bootstrap.RepoBootStrap;
+
+ public class Main {
     public static void main(String[] args) {
         App.main();
     }

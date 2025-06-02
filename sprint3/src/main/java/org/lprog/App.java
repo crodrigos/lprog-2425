@@ -1,6 +1,10 @@
 package org.lprog;
 
+import org.lprog.bootstrap.RepoBootStrap;
 import org.lprog.repo.RepoStore;
+import org.lprog.ui.MainMenu;
+import org.lprog.ui.utils.ConsoleColors;
+import org.lprog.ui.utils.ConsoleUtils;
 
 public class App {
 
@@ -23,7 +27,7 @@ public class App {
     }
 
     public void run() {
-        System.out.println("App is running...");
+        new MainMenu().run();
     }
 
     public static void main() {

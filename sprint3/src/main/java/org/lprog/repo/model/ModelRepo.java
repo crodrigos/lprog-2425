@@ -3,11 +3,12 @@ package org.lprog.repo.model;
 import org.lprog.domain.model.Model;
 import org.lprog.repo.IRepo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ModelRepo implements IRepo<Model> {
 
-    private List<Model> models;
+    private final List<Model> models = new ArrayList<>();
 
     @Override
     public void add(Model obj) {
