@@ -25,6 +25,7 @@ public class RepoBootStrap implements Runnable{
     }
 
     private void AddModel(Model model) {
+        System.out.println(model.toString());
         App.getInstance().Repos.modelRepo.add(model);
     }
 

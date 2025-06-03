@@ -1,27 +1,12 @@
 package org.lprog.repo.model;
 
 import org.lprog.domain.model.Model;
-import org.lprog.repo.IRepo;
+import org.lprog.repo.Repo;
 
-import java.util.ArrayList;
-import java.util.List;
+public class ModelRepo extends Repo<Model> {
 
-public class ModelRepo implements IRepo<Model> {
-
-    private final List<Model> models = new ArrayList<>();
-
-    @Override
-    public void add(Model obj) {
-        models.add(obj);
+    public ModelRepo() {
+        super();
     }
 
-    @Override
-    public void remove(Model obj) {
-        models.remove(obj);
-    }
-
-    @Override
-    public List<Model> getList() {
-        return models;
-    }
 }

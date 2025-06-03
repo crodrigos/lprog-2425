@@ -6,7 +6,7 @@ import org.lprog.ui.MainMenu;
 import org.lprog.ui.utils.ConsoleColors;
 import org.lprog.ui.utils.ConsoleUtils;
 
-public class App {
+public class App implements Runnable {
 
     private static App instance;
 
@@ -26,12 +26,9 @@ public class App {
         return instance;
     }
 
+    @Override
     public void run() {
+        new RepoBootStrap().run();
         new MainMenu().run();
-    }
-
-    public static void main() {
-        App app = App.getInstance();
-        app.run();
     }
 }
