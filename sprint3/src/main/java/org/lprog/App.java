@@ -1,10 +1,8 @@
 package org.lprog;
 
-import org.lprog.bootstrap.RepoBootStrap;
+import org.lprog.bootstrap.RepoBootstrap;
 import org.lprog.repo.RepoStore;
 import org.lprog.ui.MainMenu;
-import org.lprog.ui.utils.ConsoleColors;
-import org.lprog.ui.utils.ConsoleUtils;
 
 public class App implements Runnable {
 
@@ -28,7 +26,7 @@ public class App implements Runnable {
 
     @Override
     public void run() {
-        new RepoBootStrap().run();
+        new RepoBootstrap().run();
         new MainMenu().run();
     }
 }
