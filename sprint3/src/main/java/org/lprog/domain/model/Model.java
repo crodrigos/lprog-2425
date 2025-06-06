@@ -5,7 +5,7 @@ import java.util.List;
 public class Model {
 
     public String ModelName;
-    public float CargoCapacity;
+    public int CargoCapacity;
     public int Autonomy;
     public int CruisingVelocity;
     public int LiftingVelocity;
@@ -15,7 +15,7 @@ public class Model {
 
     public Model(
             String modelName,
-            float cargoCapacity,
+            int cargoCapacity,
             int autonomy,
             int cruisingVelocity,
             int liftingVelocity,
@@ -45,5 +45,10 @@ public class Model {
                 ", sensors=" + sensors +
                 ", operationalLimits=" + operationalLimits +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
     }
 }
