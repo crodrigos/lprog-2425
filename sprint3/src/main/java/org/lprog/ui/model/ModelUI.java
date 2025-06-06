@@ -1,6 +1,8 @@
 package org.lprog.ui.model;
 
 import org.lprog.App;
+import org.lprog.domain.drone.Drone;
+import org.lprog.domain.model.Model;
 import org.lprog.repo.drone.DroneRepo;
 import org.lprog.repo.model.ModelRepo;
 import org.lprog.ui.utils.ConsoleColors;
@@ -28,11 +30,43 @@ public class ModelUI implements Runnable{
         }
     };
 
+    Runnable listarDronesPorModelo = () -> {
+    List<Model> modelos = App.getInstance().Repos.modelRepo.repoList;
+
+    if (modelos.isEmpty()) {
+        ConsoleUtils.printMessage("Nenhum modelo de drone disponível.");
+        return;
+    }
+
+    List<String> nomes = modelos.stream().map(model -> model.ModelName).toList();
+    int escolha = ConsoleUtils.showAndSelectIndex(nomes, "Seleciona um modelo");
+
+    if (escolha == -1) return;
+
+    String modeloSelecionado = nomes.get(escolha);
+    List<Drone> drones = App.getInstance().Repos.droneRepo.repoList;
+
+    List<Drone> associados = drones.stream()
+        .filter(d -> d.model.ModelName.equals(modeloSelecionado))
+        .toList();
+
+    if (associados.isEmpty()) {
+        ConsoleUtils.printMessage("Nenhum drone encontrado para o modelo " + modeloSelecionado);
+    } else {
+        System.out.println("\n--- Drones do modelo " + modeloSelecionado + " ---");
+        for (Drone d : associados) {
+            System.out.println("Serial: " + d.serialNumber + ", Estado: " + d.status + ", Voo: " + d.flightTime + "min");
+        }
+    }
+};
+
     @Override
     public void run() {
         MenuOption opt1 = new MenuOption("Listar modelos", listModels);
+        MenuOption opt2 = new MenuOption("Listar drones por modelo", listarDronesPorModelo);
         List<MenuOption> options = new ArrayList<MenuOption>();
         options.add(opt1);
+        options.add(opt2);
         ConsoleUtils.showAndSelectMenu(options,"Gestão de modelos de drone");
 
     }

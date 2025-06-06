@@ -31,8 +31,14 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
+
 ### VS Code ###
 .vscode/
+bin/
 
 ### Mac OS ###
 .DS_Store
+
+
+### Antlr ###
+.antlr
