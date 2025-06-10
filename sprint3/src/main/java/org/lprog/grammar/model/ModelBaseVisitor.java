@@ -1,8 +1,5 @@
-// Generated from model/Model.g4 by ANTLR 4.9.3
-package model;
-
-    package org.lprog.grammar.model;
-
+// Generated from org/lprog/grammar/model/Model.g4 by ANTLR 4.9.3
+package org.lprog.grammar.model;
 import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
 
 /**
@@ -14,6 +11,13 @@ import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
  * operations with no return type.
  */
 public class ModelBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements ModelVisitor<T> {
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitFile(ModelParser.FileContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *

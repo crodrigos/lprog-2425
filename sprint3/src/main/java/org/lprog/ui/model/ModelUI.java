@@ -30,11 +30,10 @@ public class ModelUI implements Runnable{
 
     @Override
     public void run() {
-        MenuOption opt1 = new MenuOption("Listar modelos", listModels);
         List<MenuOption> options = new ArrayList<MenuOption>();
-        options.add(opt1);
+        options.add(new MenuOption("Listar modelos", listModels));
+        options.add(new MenuOption("Adicionar Modelos", new AddModelUI()));
         ConsoleUtils.showAndSelectMenu(options,"Gestão de modelos de drone");
-
     }
 
 }

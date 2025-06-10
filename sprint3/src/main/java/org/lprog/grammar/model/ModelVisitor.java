@@ -1,8 +1,5 @@
-// Generated from model/Model.g4 by ANTLR 4.9.3
-package model;
-
-    package org.lprog.grammar.model;
-
+// Generated from org/lprog/grammar/model/Model.g4 by ANTLR 4.9.3
+package org.lprog.grammar.model;
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
 /**
@@ -13,6 +10,12 @@ import org.antlr.v4.runtime.tree.ParseTreeVisitor;
  * operations with no return type.
  */
 public interface ModelVisitor<T> extends ParseTreeVisitor<T> {
+	/**
+	 * Visit a parse tree produced by {@link ModelParser#file}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFile(ModelParser.FileContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link ModelParser#model}.
 	 * @param ctx the parse tree

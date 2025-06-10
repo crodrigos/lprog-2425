@@ -1,8 +1,5 @@
-// Generated from model/Model.g4 by ANTLR 4.9.3
-package model;
-
-    package org.lprog.grammar.model;
-
+// Generated from org/lprog/grammar/model/Model.g4 by ANTLR 4.9.3
+package org.lprog.grammar.model;
 
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
@@ -14,6 +11,18 @@ import org.antlr.v4.runtime.tree.TerminalNode;
  * of the available methods.
  */
 public class ModelBaseListener implements ModelListener {
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterFile(ModelParser.FileContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFile(ModelParser.FileContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

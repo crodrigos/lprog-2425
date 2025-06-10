@@ -1,8 +1,5 @@
-// Generated from model/Model.g4 by ANTLR 4.9.3
-package model;
-
-    package org.lprog.grammar.model;
-
+// Generated from org/lprog/grammar/model/Model.g4 by ANTLR 4.9.3
+package org.lprog.grammar.model;
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
 /**
@@ -10,6 +7,16 @@ import org.antlr.v4.runtime.tree.ParseTreeListener;
  * {@link ModelParser}.
  */
 public interface ModelListener extends ParseTreeListener {
+	/**
+	 * Enter a parse tree produced by {@link ModelParser#file}.
+	 * @param ctx the parse tree
+	 */
+	void enterFile(ModelParser.FileContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ModelParser#file}.
+	 * @param ctx the parse tree
+	 */
+	void exitFile(ModelParser.FileContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link ModelParser#model}.
 	 * @param ctx the parse tree

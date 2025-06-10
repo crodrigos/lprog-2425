@@ -1,10 +1,8 @@
 grammar Model;
 
-@header {
-    package org.lprog.grammar.model;
-}
+file: (model)* EOF;
 
-model: MODEL ':' '{' structureBody '}' EOF;
+model: MODEL ':' '{' structureBody '}';
 
 structureBody: (keyValuePair ';')* ;
 
@@ -26,11 +24,11 @@ listBody: value (',' value)* ;
 value: ALPHANUMERIC | STRING ;
 
 // Lexer rules
-MODEL: 'Model';
+MODEL: 'Model'|'model';
 
 NUMBER         : [0-9]+ ;
 ALPHANUMERIC   : [a-zA-Z_][a-zA-Z0-9_]* ;
-STRING         : '"' (~["\r\n] | '""')* '"' ;
+STRING         : '"' (~["\r\n\-]  | '""')* '"' ;
 
 WS             : [ \t\r\n]+ -> skip ;
 COLON          : ':' ;

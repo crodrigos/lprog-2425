@@ -1,5 +1,7 @@
 package org.lprog.grammar.model;
 
+import org.antlr.v4.runtime.CharStreams;
+import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ErrorNode;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.RuleNode;
@@ -7,6 +9,7 @@ import org.antlr.v4.runtime.tree.TerminalNode;
 import org.lprog.domain.model.Model;
 import org.lprog.domain.model.Sensor;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,62 +25,108 @@ public class ModelVisitorImpl implements ModelVisitor {
     private List<String> limitations = new ArrayList<>();
 
     @Override
-    public Object visitModel(ModelParser.ModelContext ctx) {
+    public Object visitFile(ModelParser.FileContext ctx) {
         return null;
+    }
+
+    @Override
+    public Object visitModel(ModelParser.ModelContext ctx) {
+
+        // Check if all variables have values
+
+
+        return ((ModelParser.StructureBodyContext) ctx.children.get(3)).accept(this);
     }
 
     @Override
     public Object visitStructureBody(ModelParser.StructureBodyContext ctx) {
-        return null;
+        for (int i = 0; i < ctx.getChildCount(); i+=2) {
+            ctx.getChild(i).accept(this);
+        }
+        return ctx;
     }
 
     @Override
     public Object visitNameField(ModelParser.NameFieldContext ctx) {
-        this.modelName = ctx.getText();
-        return null;
+        this.modelName = ctx.getChild(2).getText();
+        return ctx;
     }
 
     @Override
     public Object visitCargoCapacityField(ModelParser.CargoCapacityFieldContext ctx) {
-        this.cargoCapacity = Integer.parseInt(ctx.getText());
-        return null;
+        this.cargoCapacity = Integer.parseInt(ctx.getChild(2).getText());
+        return ctx;
     }
 
     @Override
     public Object visitAutonomyField(ModelParser.AutonomyFieldContext ctx) {
-        this.autonomy = Integer.parseInt(ctx.getText());
-        return null;
+        this.autonomy = Integer.parseInt(ctx.getChild(2).getText());
+        return ctx;
     }
 
     @Override
     public Object visitCruisingVelocityField(ModelParser.CruisingVelocityFieldContext ctx) {
-        this.cruisingVelocity = Integer.parseInt(ctx.getText());
-        return null;
+        this.cruisingVelocity = Integer.parseInt(ctx.getChild(2).getText());
+        return ctx;
     }
 
     @Override
     public Object visitLiftingVelocityField(ModelParser.LiftingVelocityFieldContext ctx) {
-        this.liftingVelocity = Integer.parseInt(ctx.getText());
+        this.liftingVelocity = Integer.parseInt(ctx.getChild(2).getText());
         return null;
     }
 
     @Override
     public Object visitLandingVelocityField(ModelParser.LandingVelocityFieldContext ctx) {
-        this.landingVelocity = Integer.parseInt(ctx.getText());
+        this.landingVelocity = Integer.parseInt(ctx.getChild(2).getText());
         return null;
     }
 
     @Override
     public Object visitSensorsField(ModelParser.SensorsFieldContext ctx) {
-        for (var id : ctx.children) {
-            System.out.println(id.getText());
+        try {
+            List<Sensor> sensors = new ArrayList<>();
+
+            ModelParser.ListContext sensorList = (ModelParser.ListContext) ctx.children.get(2);
+            ModelParser.ListBodyContext sensorListBody = (ModelParser.ListBodyContext) sensorList.children.get(1);
+
+            for (int i = 0; i < sensorListBody.getChildCount(); i+=2) {
+                ModelParser.ValueContext value = (ModelParser.ValueContext) sensorListBody.getChild(i);
+
+                List<Sensor> allSensors = Sensor.getAllSensors();
+                for (Sensor sensor : allSensors) {
+                    if (value.getText().equalsIgnoreCase(sensor.shrt)) {
+                        sensors.add(sensor);
+                    }
+                }
+            }
+
+            this.sensors = sensors;
+
+        } catch (Exception e) {
+            this.sensors = new ArrayList<>();
         }
-        return null;
+        return ctx;
     }
 
     @Override
     public Object visitLimitationsField(ModelParser.LimitationsFieldContext ctx) {
-        return null;
+        try {
+
+            List<String> limitations = new ArrayList<>();
+
+            ModelParser.ListContext limitList = (ModelParser.ListContext) ctx.children.get(2);
+            ModelParser.ListBodyContext limitListBody = (ModelParser.ListBodyContext) limitList.children.get(1);
+
+            for (int i = 0; i < limitListBody.getChildCount(); i+=2) {
+                ModelParser.ValueContext value = (ModelParser.ValueContext) limitListBody.getChild(i);
+                limitations.add(value.getText().replace("\"", ""));
+            }
+            this.limitations = limitations;
+        } catch (Exception e) {
+            this.sensors = new ArrayList<>();
+        }
+        return ctx;
     }
 
     @Override
@@ -96,11 +145,6 @@ public class ModelVisitorImpl implements ModelVisitor {
     }
 
     @Override
-    public Object visit(ParseTree parseTree) {
-        return null;
-    }
-
-    @Override
     public Object visitChildren(RuleNode ruleNode) {
         return null;
     }
@@ -115,6 +159,11 @@ public class ModelVisitorImpl implements ModelVisitor {
         return null;
     }
 
+    @Override
+    public Object visit(ParseTree parseTree) {
+        return parseTree.accept(this);
+    }
+
     public Model GetModel() {
         return new Model(
                 this.modelName,
@@ -126,5 +175,21 @@ public class ModelVisitorImpl implements ModelVisitor {
                 this.sensors,
                 this.limitations
         );
+    }
+
+    public static Model GetModelFromFile(String path) throws IOException {
+        ModelLexer lexer = new ModelLexer(CharStreams.fromFileName(path));
+        CommonTokenStream tokens = new CommonTokenStream(lexer);
+        ModelParser parser = new ModelParser(tokens);
+
+        ParseTree tree = parser.model();
+        //System.out.println(tree.toStringTree());
+
+        ModelVisitorImpl visitor = new ModelVisitorImpl();
+        //visitor.visit(tree);
+        visitor.visit(tree);
+        Model model = visitor.GetModel();
+
+        return model;
     }
 }

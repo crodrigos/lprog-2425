@@ -1,6 +1,7 @@
 package org.lprog.domain.model;
 
 import java.util.List;
+import java.util.Objects;
 
 public class Model {
 
@@ -48,7 +49,24 @@ public class Model {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        return super.equals(obj);
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Model model = (Model) o;
+
+        return CargoCapacity == model.CargoCapacity &&
+                Autonomy == model.Autonomy &&
+                CruisingVelocity == model.CruisingVelocity &&
+                LiftingVelocity == model.LiftingVelocity &&
+                LandingVelocity == model.LandingVelocity &&
+                Objects.equals(ModelName, model.ModelName) &&
+                Objects.equals(sensors, model.sensors) &&
+                Objects.equals(operationalLimits, model.operationalLimits);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(ModelName, CargoCapacity, Autonomy, CruisingVelocity, LiftingVelocity, LandingVelocity, sensors, operationalLimits);
     }
 }

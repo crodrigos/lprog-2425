@@ -40,8 +40,8 @@
                         </goals>
                         <phase>generate-sources</phase>
                         <configuration>
-                            <sourceDirectory>src/main/antlr4/org/lprog/grammar</sourceDirectory>
-                            <outputDirectory>src/main/java/org/lprog/grammar</outputDirectory>
+                            <sourceDirectory>src/main/antlr4</sourceDirectory>
+                            <outputDirectory>src/main/java</outputDirectory>
                             <listener>true</listener>
                             <visitor>true</visitor>
                         </configuration>
