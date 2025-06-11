@@ -64,7 +64,11 @@ public class MissionUI implements Runnable {
             }
         }
 
-        //FALTA LOGICA PARA ESCOLHER MODELO
+        int index = ConsoleUtils.showAndSelectIndex(App.getInstance().Repos.droneRepo.repoList, "Selecione o drone para esta missão: ");
+        mission.setDrone(App.getInstance().Repos.droneRepo.repoList.get(index));
+        App.getInstance().Repos.missionRepo.repoList.add(mission);
+        ConsoleUtils.printMessage("Missão adicionada com sucesso!");
+
 
     }
 

@@ -41,7 +41,7 @@ public class Mission {
         addPoint(point);
     }
 
-    public void setModel(Drone drone) {
+    public void setDrone(Drone drone) {
         this.drone = drone;
     }
 
