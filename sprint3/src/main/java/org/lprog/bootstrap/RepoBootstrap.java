@@ -72,9 +72,12 @@ public class RepoBootstrap implements Runnable {
     private void AddMissions () {
         ConsoleUtils.printMessageWithColor("\nAdding missions", ConsoleColors.WHITE_BRIGHT);
 
-        Model model = getModel("FX-001");
+        Drone drone = App.getInstance().Repos.droneRepo.repoList.stream()
+                .filter(d -> d.serialNumber.equals("D-R0DR1G05"))
+                .findFirst()
+                .orElse(null);
 
-        if (model == null) {
+        if (drone == null) {
             ConsoleUtils.printMessageWithColor("Modelo FX-001 não encontrado no repositório!",
                     ConsoleColors.RED_BRIGHT);
             return;
@@ -82,7 +85,7 @@ public class RepoBootstrap implements Runnable {
 
         Mission mission1 = new Mission(
             new Date(2025, 06, 14),
-                model,
+                drone,
                 new Point(
                     40, // Latitude
                         50, // Altitude

@@ -6,7 +6,7 @@ body: (keyValuePair ';')*;
 
 keyValuePair
     : 'STT' ':' DATE              #StaringTime
-    | 'MD' ':' MODEL              #Model
+    | 'SN' ':' DRONE              #DroneSerialNumber
     | 'STP' ':' POINT             #StartingPoint
     | 'deliveries' ':' list       #ListOfDeliveries
     ;
@@ -19,7 +19,7 @@ MISSION: 'mission';
 
 DATE   : [0-9]{4} '-' [0-9]{2} '-' [0-9]{2} ',' [0-9]{2} ':' [0-9]{2};
 
-MODEL  : [A-Z]{2} '-' [A-Z0-9]{3} ;
+DRONE  : [A-Z]+ '-' [A-Z0-9]+ ;
 
 POINT  : '(' [0-9]+ ',' [0-9]+ ',' [0-9]+ ')';
 
