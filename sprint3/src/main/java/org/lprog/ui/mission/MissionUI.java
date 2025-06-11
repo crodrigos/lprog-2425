@@ -1,0 +1,84 @@
+package org.lprog.ui.mission;
+
+import org.lprog.App;
+import org.lprog.domain.mission.Mission;
+import org.lprog.domain.mission.Point;
+import org.lprog.ui.utils.ConsoleUtils;
+import org.lprog.ui.utils.MenuOption;
+
+import java.util.*;
+
+public class MissionUI implements Runnable {
+
+    @Override
+    public void run () {
+        List<MenuOption> options = new ArrayList<>();
+        options.add(new MenuOption("Carregar missões através de ficheiro", this::loadMissionsMenu));
+        options.add(new MenuOption("Criar missão", this::manuallyAddMission));
+        options.add(new MenuOption("Listar missões", this::listMissions));
+        options.add(new MenuOption("Exportar missões para ficheiro", this::exportMissionsMenu));
+        ConsoleUtils.showAndSelectMenu(options, "Gestão de Missões");
+    }
+
+    private void loadMissionsMenu() {
+        String path = ConsoleUtils.readLineFromConsole("Caminho do ficheiro: ");
+        loadMissionsFromFile(path);
+    }
+
+    private void exportMissionsMenu() {
+        String fileName = ConsoleUtils.readLineFromConsole("Nome do ficheiro destino: ");
+        exportMissionsToFile(fileName);
+    }
+
+    private void loadMissionsFromFile(String filePath) {
+        //FALTA ISTO
+    }
+
+    private void exportMissionsToFile(String fileName) {
+        //FALTA ISTO
+    }
+
+    private void manuallyAddMission() {
+        Date startDate = ConsoleUtils.readDateFromConsole("Data de início da missão (AAAA-MM-DD,HH:MM): ");
+
+        String startingPoint = ConsoleUtils.readLineFromConsole("Ponto de partida (latitude,altitude,longitude): ");
+        String[] coords = startingPoint.split(",");
+        Point startingPointObj = new Point(Integer.parseInt(coords[0]),
+                                           Integer.parseInt(coords[1]),
+                                           Integer.parseInt(coords[2]));
+
+        Mission mission = new Mission(startDate, startingPointObj);
+
+        System.out.println("Insira os pontos para entrega linha por linha,");
+        System.out.println("ou 'fim' para terminar a inserção de pontos.");
+
+        while (true) {
+            String input = ConsoleUtils.readLineFromConsole("Ponto de entrega: ");
+            if (input.equalsIgnoreCase("fim")) {
+                break;
+            }
+            try {
+                mission.addPoint(input);
+            } catch (NumberFormatException e) {
+                ConsoleUtils.printMessage("Formato inválido. Use 'latitude,altitude,longitude'.");
+            }
+        }
+
+        //FALTA LOGICA PARA ESCOLHER MODELO
+
+    }
+
+    private void listMissions () {
+        List<Mission> missions = loadMissions();
+        if (!missions.isEmpty()) {
+            ConsoleUtils.showList(missions, "Missões Disponíveis");
+        } else {
+            ConsoleUtils.printMessage("Nenhuma missão encontrada");
+        }
+    }
+
+    private static List<Mission> loadMissions() {
+        return App.getInstance().Repos.missionRepo.repoList;
+    }
+
+}

@@ -19,19 +19,39 @@ public class Mission {
         this.deliveries = deliveries;
     }
 
+    public Mission(Date startDate, Point startingPoint) {
+        this.startDate = startDate;
+        this.StartingPoint = startingPoint;
+        this.deliveries = new java.util.ArrayList<>();
+    }
+
     public void addPoint (Point point) {
         deliveries.add(point);
         System.out.println("Point " +
                 point.toString() + "added.");
     }
 
+    public void addPoint (String pointString) {
+        String[] coords = pointString.split(",");
+        Point point = new Point(
+                Integer.parseInt(coords[0]),
+                Integer.parseInt(coords[1]),
+                Integer.parseInt(coords[2])
+        );
+        addPoint(point);
+    }
+
+    public void setModel(Model model) {
+        this.model = model;
+    }
+
     @Override
     public String toString() {
-        return "Mission{" +
-                "startDate=" + startDate +
-                ", model=" + model.ModelName +
-                ", StartingPoint=" + StartingPoint +
-                ", deliveries=" + deliveries +
-                '}';
+        return "Mission {" +
+                "  Starting Date: " + startDate +
+                "  Model: " + model.ModelName +
+                "  Starting Point: " + StartingPoint +
+                "  Deliveries: {" + deliveries + "}" +
+                "}";
     }
 }
