@@ -24,4 +24,14 @@ public class Mission {
         System.out.println("Point " +
                 point.toString() + "added.");
     }
+
+    @Override
+    public String toString() {
+        return "Mission{" +
+                "startDate=" + startDate +
+                ", model=" + model.ModelName +
+                ", StartingPoint=" + StartingPoint +
+                ", deliveries=" + deliveries +
+                '}';
+    }
 }
