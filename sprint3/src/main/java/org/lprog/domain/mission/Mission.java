@@ -7,19 +7,22 @@ import java.util.List;
 
 public class Mission {
 
+    public int id;
     public Date startDate;
     public Drone drone;
     public Point StartingPoint;
     public List<Point> deliveries;
 
-    public Mission(Date startDate, Drone drone, Point startingPoint, List<Point> deliveries) {
+    public Mission(int id, Date startDate, Drone drone, Point startingPoint, List<Point> deliveries) {
+        this.id = id;
         this.startDate = startDate;
         this.drone = drone;
         this.StartingPoint = startingPoint;
         this.deliveries = deliveries;
     }
 
-    public Mission(Date startDate, Point startingPoint) {
+    public Mission(int id, Date startDate, Point startingPoint) {
+        this.id = id;
         this.startDate = startDate;
         this.StartingPoint = startingPoint;
         this.deliveries = new java.util.ArrayList<>();
@@ -48,8 +51,9 @@ public class Mission {
     @Override
     public String toString() {
         return "Mission {" +
+                "  ID: " + id +
                 "  Starting Date: " + startDate +
-                "  Model: " + drone.serialNumber +
+                "  Drone: " + drone.serialNumber +
                 "  Starting Point: " + StartingPoint +
                 "  Deliveries: {" + deliveries + "}" +
                 "}";

@@ -39,6 +39,8 @@ public class MissionUI implements Runnable {
     }
 
     private void manuallyAddMission() {
+        int id = ConsoleUtils.readIntegerFromConsole("Insira o ID da missão (deve ser único XXX):");
+
         Date startDate = ConsoleUtils.readDateFromConsole("Data de início da missão (AAAA-MM-DD,HH:MM): ");
 
         String startingPoint = ConsoleUtils.readLineFromConsole("Ponto de partida (latitude,altitude,longitude): ");
@@ -47,7 +49,7 @@ public class MissionUI implements Runnable {
                                            Integer.parseInt(coords[1]),
                                            Integer.parseInt(coords[2]));
 
-        Mission mission = new Mission(startDate, startingPointObj);
+        Mission mission = new Mission(id, startDate, startingPointObj);
 
         System.out.println("Insira os pontos para entrega linha por linha,");
         System.out.println("ou 'fim' para terminar a inserção de pontos.");
