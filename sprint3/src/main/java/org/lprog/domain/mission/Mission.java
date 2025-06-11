@@ -48,6 +48,10 @@ public class Mission {
         this.drone = drone;
     }
 
+    public int getId() {
+        return id;
+    }
+
     @Override
     public String toString() {
         return "Mission {" +

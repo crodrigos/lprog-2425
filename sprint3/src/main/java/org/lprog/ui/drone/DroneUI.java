@@ -5,6 +5,8 @@ import org.antlr.v4.runtime.tree.*;
 import org.lprog.App;
 import org.lprog.domain.drone.Drone;
 import org.lprog.domain.drone.Status;
+import org.lprog.domain.mission.Mission;
+import org.lprog.domain.mission.Point;
 import org.lprog.domain.model.Model;
 import org.lprog.grammar.drone.*;
 import org.lprog.ui.utils.ConsoleUtils;
@@ -27,6 +29,8 @@ public class DroneUI implements Runnable {
         options.add(new MenuOption("Adicionar drone", this::adicionarDroneManualmente));
         options.add(new MenuOption("Listar frota", this::listarFrota));
         options.add(new MenuOption("Exportar frota para ficheiro", this::exportarFrotaMenu));
+        options.add(new MenuOption("Calcular Distância Total Percorrida pelo Drone numa missão",
+                this::calcularDistanciaTotal));
         ConsoleUtils.showAndSelectMenu(options, "Gestão de Frotas");
     }
 
@@ -37,8 +41,9 @@ public class DroneUI implements Runnable {
     }
 
     private void exportarFrotaMenu() {
-        System.out.print("Nome do ficheiro destino: ");;
-        exportarFrotaParaFicheiro();
+        System.out.print("Nome do ficheiro destino: ");
+        String filePath = scanner.nextLine();
+        exportarFrotaParaFicheiro(filePath);
     }
 
     private static void carregarFrotaDeFicheiro(String filePath) {
@@ -81,35 +86,37 @@ public class DroneUI implements Runnable {
         }
     }
 
-    private static void exportarFrotaParaFicheiro() {
-    String filePath = "frota_exportada.txt";
-
-    try (PrintWriter writer = new PrintWriter(filePath)) {
-        List<Drone> drones = App.getInstance().Repos.droneRepo.repoList;
-
-        for (Drone drone : drones) {
-            writer.println("drone: {");
-            writer.println("  SN:" + drone.serialNumber + ";");
-            writer.println("  TV:" + drone.flightTime + ";");
-            writer.println("  MD:" + drone.model.ModelName + ";");
-
-            if (!drone.restrictions.isEmpty()) {
-                writer.print("  RT:[");
-                writer.print(String.join(", ", drone.restrictions.stream()
-                        .map(r -> "\"" + r + "\"").toList()));
-                writer.println("];");
-            }
-
-            writer.println("  EA:" + drone.status + ";");
-            writer.println("}");
+    private static void exportarFrotaParaFicheiro(String filePath) {
+        if (filePath == null || filePath.isBlank()) {
+            filePath = "frota_exportada.txt";
         }
 
-        System.out.println("Frota exportada com sucesso para " + filePath);
+        try (PrintWriter writer = new PrintWriter(filePath)) {
+            List<Drone> drones = App.getInstance().Repos.droneRepo.repoList;
 
-    } catch (Exception e) {
-        System.err.println("Erro ao exportar frota: " + e.getMessage());
+            for (Drone drone : drones) {
+                writer.println("drone: {");
+                writer.println("  SN:" + drone.serialNumber + ";");
+                writer.println("  TV:" + drone.flightTime + ";");
+                writer.println("  MD:" + drone.model.ModelName + ";");
+
+                if (!drone.restrictions.isEmpty()) {
+                    writer.print("  RT:[");
+                    writer.print(String.join(", ", drone.restrictions.stream()
+                            .map(r -> "\"" + r + "\"").toList()));
+                    writer.println("];");
+                }
+
+                writer.println("  EA:" + drone.status + ";");
+                writer.println("}");
+            }
+
+            System.out.println("Frota exportada com sucesso para " + filePath);
+
+        } catch (Exception e) {
+            System.err.println("Erro ao exportar frota: " + e.getMessage());
+        }
     }
-}
 
     private static Map<String, Model> carregarModelos() {
         Map<String, Model> modelos = new HashMap<>();
@@ -173,4 +180,71 @@ public class DroneUI implements Runnable {
             System.out.println("Erro ao adicionar drone: " + e.getMessage());
         }
     }
+
+    private void calcularDistanciaTotal() {
+        System.out.print("Inserir o número da missão (XXX): ");
+        String missionNumber = scanner.nextLine();
+        int missionId;
+        try {
+            missionId = Integer.parseInt(missionNumber);
+        } catch (NumberFormatException e) {
+            System.out.println("Número de missão inválido.");
+            return;
+        }
+
+        List<Mission> missions = App.getInstance().Repos.missionRepo.repoList;
+        Mission mission = missions.stream()
+                .filter(m -> m.getId() == missionId)
+                .findFirst()
+                .orElse(null);
+        if (mission == null) {
+            System.out.println("Missão não encontrada.");
+            return;
+        }
+
+        if (mission.drone == null) {
+            System.out.println("Missão não atribuída a nenhum drone.");
+            return;
+        }
+
+        if (mission.deliveries.isEmpty()) {
+            System.out.println("Missão sem pontos de entrega.");
+            return;
+        }
+
+        if (mission.StartingPoint == null) {
+            System.out.println("Missão sem ponto de partida definido.");
+            return;
+        }
+
+        double totalDistance = 0.0;
+        Point lastPoint = mission.StartingPoint;
+
+        System.out.println("Detalhes do percurso:");
+        for (int i = 0; i < mission.deliveries.size(); i++) {
+            Point current = mission.deliveries.get(i);
+            double distance = lastPoint.distanceTo(current);
+            totalDistance += distance;
+            System.out.printf("- De %s para %s: %.2f metros%n",
+                    formatPoint(lastPoint), formatPoint(current), distance);
+            lastPoint = current;
+        }
+
+        // Voltar ao ponto de partida
+        double returnDistance = lastPoint.distanceTo(mission.StartingPoint);
+        totalDistance += returnDistance;
+        System.out.printf("- De %s de volta ao ponto de partida %s: %.2f metros%n",
+                formatPoint(lastPoint), formatPoint(mission.StartingPoint), returnDistance);
+
+        System.out.printf("%nDistância total percorrida na missão %d pelo drone %s: %.2f metros (incluindo regresso)%n",
+                missionId, mission.drone.serialNumber, totalDistance);
+    }
+
+    private String formatPoint(Point p) {
+        return String.format("(%.2f, %.2f, %d)",
+                p.latitude,
+                p.longitude,
+                p.altitude);
+    }
+
 }
