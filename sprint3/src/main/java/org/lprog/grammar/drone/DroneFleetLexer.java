@@ -1,4 +1,4 @@
-// Generated from drone\DroneFleet.g4 by ANTLR 4.9.3
+// Generated from org/lprog/grammar/drone/DroneFleet.g4 by ANTLR 4.9.3
 package org.lprog.grammar.drone;
 import org.antlr.v4.runtime.Lexer;
 import org.antlr.v4.runtime.CharStream;

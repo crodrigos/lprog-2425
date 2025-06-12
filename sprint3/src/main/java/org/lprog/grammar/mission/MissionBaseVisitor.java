@@ -1,5 +1,5 @@
-// Generated from mission\Mission.g4 by ANTLR 4.9.3
-package mission;
+// Generated from org/lprog/grammar/mission/Mission.g4 by ANTLR 4.9.3
+package org.lprog.grammar.mission;
 import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
 
 /**
@@ -31,6 +31,13 @@ public class MissionBaseVisitor<T> extends AbstractParseTreeVisitor<T> implement
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
+	@Override public T visitMissionID(MissionParser.MissionIDContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
 	@Override public T visitStaringTime(MissionParser.StaringTimeContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
@@ -38,7 +45,7 @@ public class MissionBaseVisitor<T> extends AbstractParseTreeVisitor<T> implement
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitModel(MissionParser.ModelContext ctx) { return visitChildren(ctx); }
+	@Override public T visitDroneSerialNumber(MissionParser.DroneSerialNumberContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
