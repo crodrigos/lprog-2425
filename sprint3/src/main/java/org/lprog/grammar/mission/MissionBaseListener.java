@@ -52,13 +52,13 @@ public class MissionBaseListener implements MissionListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterModel(MissionParser.ModelContext ctx) { }
+	@Override public void enterDroneSerialNumber(MissionParser.DroneSerialNumberContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitModel(MissionParser.ModelContext ctx) { }
+	@Override public void exitDroneSerialNumber(MissionParser.DroneSerialNumberContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

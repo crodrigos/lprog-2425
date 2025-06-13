@@ -39,7 +39,6 @@ public class MissionUI implements Runnable {
     }
 
     private void manuallyAddMission() {
-        int id = ConsoleUtils.readIntegerFromConsole("Insira o ID da missão (deve ser único XXX):");
 
         Date startDate = ConsoleUtils.readDateFromConsole("Data de início da missão (AAAA-MM-DD,HH:MM): ");
 

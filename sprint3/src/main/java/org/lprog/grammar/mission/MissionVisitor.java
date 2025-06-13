@@ -30,12 +30,12 @@ public interface MissionVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitStaringTime(MissionParser.StaringTimeContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code Model}
+	 * Visit a parse tree produced by the {@code DroneSerialNumber}
 	 * labeled alternative in {@link MissionParser#keyValuePair}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitModel(MissionParser.ModelContext ctx);
+	T visitDroneSerialNumber(MissionParser.DroneSerialNumberContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code StartingPoint}
 	 * labeled alternative in {@link MissionParser#keyValuePair}.
