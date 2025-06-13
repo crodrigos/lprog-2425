@@ -5,7 +5,7 @@ null
 '}'
 ';'
 'STT'
-'SN'
+'MD'
 'STP'
 'deliveries'
 ','
@@ -28,7 +28,7 @@ null
 null
 MISSION
 DATE
-DRONE
+MODEL
 POINT
 WS
 

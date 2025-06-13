@@ -1,4 +1,4 @@
-// Generated from org/lprog/grammar/mission/Mission.g4 by ANTLR 4.9.3
+// Generated from org\lprog\grammar\mission\Mission.g4 by ANTLR 4.9.3
 package org.lprog.grammar.mission;
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
@@ -30,12 +30,12 @@ public interface MissionVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitStaringTime(MissionParser.StaringTimeContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code DroneSerialNumber}
+	 * Visit a parse tree produced by the {@code Model}
 	 * labeled alternative in {@link MissionParser#keyValuePair}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitDroneSerialNumber(MissionParser.DroneSerialNumberContext ctx);
+	T visitModel(MissionParser.ModelContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code StartingPoint}
 	 * labeled alternative in {@link MissionParser#keyValuePair}.

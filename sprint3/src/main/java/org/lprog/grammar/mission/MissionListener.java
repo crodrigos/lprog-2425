@@ -1,4 +1,4 @@
-// Generated from org/lprog/grammar/mission/Mission.g4 by ANTLR 4.9.3
+// Generated from org\lprog\grammar\mission\Mission.g4 by ANTLR 4.9.3
 package org.lprog.grammar.mission;
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
@@ -40,17 +40,17 @@ public interface MissionListener extends ParseTreeListener {
 	 */
 	void exitStaringTime(MissionParser.StaringTimeContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code DroneSerialNumber}
+	 * Enter a parse tree produced by the {@code Model}
 	 * labeled alternative in {@link MissionParser#keyValuePair}.
 	 * @param ctx the parse tree
 	 */
-	void enterDroneSerialNumber(MissionParser.DroneSerialNumberContext ctx);
+	void enterModel(MissionParser.ModelContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code DroneSerialNumber}
+	 * Exit a parse tree produced by the {@code Model}
 	 * labeled alternative in {@link MissionParser#keyValuePair}.
 	 * @param ctx the parse tree
 	 */
-	void exitDroneSerialNumber(MissionParser.DroneSerialNumberContext ctx);
+	void exitModel(MissionParser.ModelContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code StartingPoint}
 	 * labeled alternative in {@link MissionParser#keyValuePair}.
