@@ -212,13 +212,13 @@ public class DroneUI implements Runnable {
             return;
         }
 
-        if (mission.StartingPoint == null) {
+        if (mission.startingPoint == null) {
             System.out.println("Missão sem ponto de partida definido.");
             return;
         }
 
         double totalDistance = 0.0;
-        Point lastPoint = mission.StartingPoint;
+        Point lastPoint = mission.startingPoint;
 
         System.out.println("Detalhes do percurso:");
         for (int i = 0; i < mission.deliveries.size(); i++) {
@@ -231,10 +231,10 @@ public class DroneUI implements Runnable {
         }
 
         // Voltar ao ponto de partida
-        double returnDistance = lastPoint.distanceTo(mission.StartingPoint);
+        double returnDistance = lastPoint.distanceTo(mission.startingPoint);
         totalDistance += returnDistance;
         System.out.printf("- De %s de volta ao ponto de partida %s: %.2f metros%n",
-                formatPoint(lastPoint), formatPoint(mission.StartingPoint), returnDistance);
+                formatPoint(lastPoint), formatPoint(mission.startingPoint), returnDistance);
 
         System.out.printf("%nDistância total percorrida na missão %d pelo drone %s: %.2f metros (incluindo regresso)%n",
                 missionId, mission.drone.serialNumber, totalDistance);

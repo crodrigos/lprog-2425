@@ -14,21 +14,21 @@ public class Mission {
     public Date startDate;
     public Model model;
     public Drone drone;
-    public Point StartingPoint;
+    public Point startingPoint;
     public List<Point> deliveries;
 
     public Mission(Date startDate, Model model, Point startingPoint, List<Point> deliveries) {
         this.id = idCounter + 1;
         this.startDate = startDate;
         this.model = model;
-        this.StartingPoint = startingPoint;
+        this.startingPoint = startingPoint;
         this.deliveries = deliveries;
     }
 
     public Mission(Date startDate, Point startingPoint) {
         this.id = idCounter + 1;
         this.startDate = startDate;
-        this.StartingPoint = startingPoint;
+        this.startingPoint = startingPoint;
         this.deliveries = new java.util.ArrayList<>();
     }
 
@@ -65,8 +65,9 @@ public class Mission {
         return "Mission {" +
                 "  ID: " + id +
                 "  Starting Date: " + startDate +
-                "  Drone: " + drone.serialNumber +
-                "  Starting Point: " + StartingPoint +
+                "  Model: " + (model != null ? model.ModelName : "No model assigned") +
+                "  Drone: " + (drone != null ? drone.serialNumber : "No drone assigned") +
+                "  Starting Point: " + startingPoint +
                 "  Deliveries: {" + deliveries + "}" +
                 "}";
     }
