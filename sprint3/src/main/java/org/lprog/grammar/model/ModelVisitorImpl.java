@@ -24,17 +24,25 @@ public class ModelVisitorImpl implements ModelVisitor {
     private List<Sensor> sensors = new ArrayList<>();
     private List<String> limitations = new ArrayList<>();
 
+    List<Model> models = new ArrayList<>();
+
     @Override
     public Object visitFile(ModelParser.FileContext ctx) {
+        for (int i = 0; i < ctx.getChildCount()-1; i++) {
+            // Procurar por cada model
+            ctx.getChild(i).accept(this);
+        }
+        return null;
+    }
+
+    @Override
+    public Object visitModelEnd(ModelParser.ModelEndContext ctx) {
+        models.add(GetModel());
         return null;
     }
 
     @Override
     public Object visitModel(ModelParser.ModelContext ctx) {
-
-        // Check if all variables have values
-
-
         return ((ModelParser.StructureBodyContext) ctx.children.get(3)).accept(this);
     }
 
@@ -164,7 +172,7 @@ public class ModelVisitorImpl implements ModelVisitor {
         return parseTree.accept(this);
     }
 
-    public Model GetModel() {
+    private Model GetModel() {
         return new Model(
                 this.modelName,
                 this.cargoCapacity,
@@ -177,7 +185,11 @@ public class ModelVisitorImpl implements ModelVisitor {
         );
     }
 
-    public static Model GetModelFromFile(String path) throws IOException {
+    public List<Model> GetModels() {
+        return new ArrayList<>(this.models);
+    }
+
+    public static List<Model> GetModelFromFile(String path) throws IOException {
         ModelLexer lexer = new ModelLexer(CharStreams.fromFileName(path));
         CommonTokenStream tokens = new CommonTokenStream(lexer);
         ModelParser parser = new ModelParser(tokens);
@@ -188,8 +200,8 @@ public class ModelVisitorImpl implements ModelVisitor {
         ModelVisitorImpl visitor = new ModelVisitorImpl();
         //visitor.visit(tree);
         visitor.visit(tree);
-        Model model = visitor.GetModel();
+        List<Model> models = visitor.GetModels();
 
-        return model;
+        return models;
     }
 }

@@ -28,6 +28,16 @@ public interface ModelListener extends ParseTreeListener {
 	 */
 	void exitModel(ModelParser.ModelContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link ModelParser#modelEnd}.
+	 * @param ctx the parse tree
+	 */
+	void enterModelEnd(ModelParser.ModelEndContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ModelParser#modelEnd}.
+	 * @param ctx the parse tree
+	 */
+	void exitModelEnd(ModelParser.ModelEndContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link ModelParser#structureBody}.
 	 * @param ctx the parse tree
 	 */

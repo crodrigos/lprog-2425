@@ -4,7 +4,6 @@ import org.lprog.App;
 import org.lprog.domain.drone.Drone;
 import org.lprog.domain.model.Model;
 import org.lprog.repo.model.ModelRepo;
-import ConsoleColors;
 import org.lprog.ui.utils.ConsoleUtils.ConsoleUtils;
 import org.lprog.ui.utils.ConsoleUtils.MenuOption;
 

@@ -40,6 +40,18 @@ public class ModelBaseListener implements ModelListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterModelEnd(ModelParser.ModelEndContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitModelEnd(ModelParser.ModelEndContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterStructureBody(ModelParser.StructureBodyContext ctx) { }
 	/**
 	 * {@inheritDoc}

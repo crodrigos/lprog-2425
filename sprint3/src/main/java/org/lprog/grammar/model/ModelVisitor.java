@@ -23,6 +23,12 @@ public interface ModelVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitModel(ModelParser.ModelContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link ModelParser#modelEnd}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitModelEnd(ModelParser.ModelEndContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link ModelParser#structureBody}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

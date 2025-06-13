@@ -40,18 +40,6 @@ public class MissionBaseListener implements MissionListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterMissionID(MissionParser.MissionIDContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitMissionID(MissionParser.MissionIDContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterStaringTime(MissionParser.StaringTimeContext ctx) { }
 	/**
 	 * {@inheritDoc}

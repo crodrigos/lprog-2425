@@ -3,7 +3,7 @@ package org.lprog.bootstrap;
 import org.lprog.App;
 import org.lprog.domain.drone.Drone;
 import org.lprog.domain.drone.Status;
-import org.lprog.domain.mission.;
+import org.lprog.domain.mission.Mission;
 import org.lprog.domain.mission.Point;
 import org.lprog.domain.model.Model;
 import org.lprog.domain.model.Sensor;

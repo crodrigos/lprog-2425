@@ -1,5 +1,5 @@
-// Generated from mission\Mission.g4 by ANTLR 4.9.3
-package mission;
+// Generated from org/lprog/grammar/mission/Mission.g4 by ANTLR 4.9.3
+package org.lprog.grammar.mission;
 import org.antlr.v4.runtime.Lexer;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.Token;

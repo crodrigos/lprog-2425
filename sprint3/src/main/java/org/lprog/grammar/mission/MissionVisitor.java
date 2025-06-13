@@ -23,13 +23,6 @@ public interface MissionVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitBody(MissionParser.BodyContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code MissionID}
-	 * labeled alternative in {@link MissionParser#keyValuePair}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitMissionID(MissionParser.MissionIDContext ctx);
-	/**
 	 * Visit a parse tree produced by the {@code StaringTime}
 	 * labeled alternative in {@link MissionParser#keyValuePair}.
 	 * @param ctx the parse tree

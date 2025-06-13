@@ -10,21 +10,13 @@ import org.junit.jupiter.api.Test;
 import org.lprog.domain.model.Model;
 import org.lprog.domain.model.Sensor;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class ModelLexerTest {
 
-    public String example1Text = "Model:{\n" +
-        "    NM:FX001;\n" +
-        "    CC:20000;\n" +
-        "    AT:60;\n" +
-        "    VC:20;\n" +
-        "    VS:5;\n" +
-        "    VD:5;\n" +
-        "    SS:[GPS,CAM];\n" +
-        "    LO:[\"Máximo de horas de voo\"];\n" +
-        "}";
+    public String pathToTestFile = "src/test/resources/model_example";
 
     public Model example1Model = new Model(
             "FX001",
@@ -38,10 +30,10 @@ public class ModelLexerTest {
     );
 
     @Test
-    @DisplayName("Test if Lexer reads stream of chars correctly")
-    public void testExample1Model() {
+    @DisplayName("Test if Lexer reads from file path")
+    public void testExample1Model() throws IOException {
 
-        ModelLexer lexer = new ModelLexer(CharStreams.fromString(example1Text));
+        ModelLexer lexer = new ModelLexer(CharStreams.fromFileName(pathToTestFile));
         CommonTokenStream tokens = new CommonTokenStream(lexer);
         ModelParser parser = new ModelParser(tokens);
 
@@ -51,7 +43,7 @@ public class ModelLexerTest {
         ModelVisitorImpl visitor = new ModelVisitorImpl();
         //visitor.visit(tree);
         visitor.visit(tree);
-        Model model = visitor.GetModel();
+        var model = visitor.GetModels();
 
         Assertions.assertEquals(model, example1Model);
     }

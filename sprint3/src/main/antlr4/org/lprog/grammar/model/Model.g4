@@ -2,7 +2,9 @@ grammar Model;
 
 file: (model)* EOF;
 
-model: MODEL ':' '{' structureBody '}';
+model: MODEL ':' '{' structureBody modelEnd;
+
+modelEnd: '}';
 
 structureBody: (keyValuePair ';')* ;
 
