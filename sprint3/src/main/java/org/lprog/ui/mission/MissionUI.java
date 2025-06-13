@@ -1,14 +1,12 @@
 package org.lprog.ui.mission;
 
 import org.lprog.App;
-import org.lprog.domain.drone.Drone;
 import org.lprog.domain.mission.Mission;
 import org.lprog.domain.mission.Point;
 import org.lprog.ui.utils.ConsoleUtils;
 import org.lprog.ui.utils.MenuOption;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class MissionUI implements Runnable {
 
@@ -51,7 +49,7 @@ public class MissionUI implements Runnable {
                 Double.parseDouble(coords[1]),
                 Integer.parseInt(coords[2]));
 
-        Mission mission = new Mission(id, startDate, startingPointObj);
+        Mission mission = new Mission(startDate, startingPointObj);
 
         System.out.println("Insira os pontos para entrega linha por linha,");
         System.out.println("ou 'fim' para terminar a inserção de pontos.");

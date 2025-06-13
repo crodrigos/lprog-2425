@@ -84,7 +84,6 @@ public class RepoBootstrap implements Runnable {
         }
 
         Mission mission1 = new Mission(
-                004,
             new Date(2025, 06, 14),
                 drone,
                 new Point(
