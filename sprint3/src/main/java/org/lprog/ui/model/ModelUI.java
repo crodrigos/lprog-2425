@@ -3,11 +3,10 @@ package org.lprog.ui.model;
 import org.lprog.App;
 import org.lprog.domain.drone.Drone;
 import org.lprog.domain.model.Model;
-import org.lprog.repo.drone.DroneRepo;
 import org.lprog.repo.model.ModelRepo;
-import org.lprog.ui.utils.ConsoleColors;
-import org.lprog.ui.utils.ConsoleUtils;
-import org.lprog.ui.utils.MenuOption;
+import ConsoleColors;
+import org.lprog.ui.utils.ConsoleUtils.ConsoleUtils;
+import org.lprog.ui.utils.ConsoleUtils.MenuOption;
 
 import java.util.ArrayList;
 import java.util.List;

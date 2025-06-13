@@ -1,14 +1,12 @@
 package org.lprog.ui.mission;
 
 import org.lprog.App;
-import org.lprog.domain.drone.Drone;
 import org.lprog.domain.mission.Mission;
 import org.lprog.domain.mission.Point;
-import org.lprog.ui.utils.ConsoleUtils;
-import org.lprog.ui.utils.MenuOption;
+import org.lprog.ui.utils.ConsoleUtils.ConsoleUtils;
+import org.lprog.ui.utils.ConsoleUtils.MenuOption;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class MissionUI implements Runnable {
 

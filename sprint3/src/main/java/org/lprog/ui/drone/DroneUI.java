@@ -9,8 +9,8 @@ import org.lprog.domain.mission.Mission;
 import org.lprog.domain.mission.Point;
 import org.lprog.domain.model.Model;
 import org.lprog.grammar.drone.*;
-import org.lprog.ui.utils.ConsoleUtils;
-import org.lprog.ui.utils.MenuOption;
+import org.lprog.ui.utils.ConsoleUtils.ConsoleUtils;
+import org.lprog.ui.utils.ConsoleUtils.MenuOption;
 
 import java.io.FileInputStream;
 import java.io.InputStream;

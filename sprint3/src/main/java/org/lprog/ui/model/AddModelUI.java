@@ -2,13 +2,13 @@ package org.lprog.ui.model;
 
 import org.lprog.domain.model.Model;
 import org.lprog.grammar.model.ModelVisitorImpl;
-import org.lprog.ui.utils.ConsoleUtils;
-import org.lprog.ui.utils.MenuOption;
+import org.lprog.ui.utils.ConsoleUtils.ConsoleUtils;
+import org.lprog.ui.utils.ConsoleUtils.MenuOption;
+import org.lprog.ui.utils.FileDialog;
 
 import java.util.List;
 import java.util.ArrayList;
 import javax.swing.*;
-import java.awt.*;
 import java.io.File;
 
 public class AddModelUI implements Runnable{
@@ -18,20 +18,12 @@ public class AddModelUI implements Runnable{
         public void run() {
             JFileChooser fileChooser = new JFileChooser();
 
-            var dialogResp = fileChooser.showOpenDialog(fileChooser);
-
-            if (dialogResp == JFileChooser.APPROVE_OPTION) {
-                File file = fileChooser.getSelectedFile();
-
-                try {
-                    Model model = ModelVisitorImpl.GetModelFromFile(file.getAbsolutePath());
-                } catch (Exception e) {
-                    ConsoleUtils.printError(e.getMessage());
-                }
-
+            var file = new FileDialog().getFile();
+            if (file==null) {
+                ConsoleUtils.printError("File not selected");
             }
             else {
-                ConsoleUtils.printError("Não foi selecionado um ficheiro");
+                ConsoleUtils.printMessage("Selected file: " + file.getAbsolutePath());
             }
         }
     };

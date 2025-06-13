@@ -7,8 +7,8 @@ import org.lprog.domain.mission.Mission;
 import org.lprog.domain.mission.Point;
 import org.lprog.domain.model.Model;
 import org.lprog.domain.model.Sensor;
-import org.lprog.ui.utils.ConsoleColors;
-import org.lprog.ui.utils.ConsoleUtils;
+import org.lprog.ui.utils.ConsoleUtils.*;
+import org.lprog.ui.utils.ConsoleUtils.ConsoleUtils;
 
 import java.util.ArrayList;
 import java.util.Date;

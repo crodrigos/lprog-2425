@@ -3,8 +3,8 @@ package org.lprog.ui;
 import org.lprog.ui.mission.MissionUI;
 import org.lprog.ui.model.ModelUI;
 import org.lprog.ui.drone.DroneUI;
-import org.lprog.ui.utils.ConsoleUtils;
-import org.lprog.ui.utils.MenuOption;
+import org.lprog.ui.utils.ConsoleUtils.ConsoleUtils;
+import org.lprog.ui.utils.ConsoleUtils.MenuOption;
 
 import java.util.ArrayList;
 import java.util.List;
