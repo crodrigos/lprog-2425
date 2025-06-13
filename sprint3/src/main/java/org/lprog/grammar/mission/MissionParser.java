@@ -1,5 +1,5 @@
-// Generated from mission\Mission.g4 by ANTLR 4.9.3
-package mission;
+// Generated from org\lprog\grammar\mission\Mission.g4 by ANTLR 4.9.3
+package org.lprog.grammar.mission;
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
@@ -18,7 +18,7 @@ public class MissionParser extends Parser {
 		new PredictionContextCache();
 	public static final int
 		T__0=1, T__1=2, T__2=3, T__3=4, T__4=5, T__5=6, T__6=7, T__7=8, T__8=9, 
-		MISSION=10, DATE=11, DRONE=12, POINT=13, WS=14;
+		MISSION=10, DATE=11, MODEL=12, POINT=13, WS=14;
 	public static final int
 		RULE_mission = 0, RULE_body = 1, RULE_keyValuePair = 2, RULE_list = 3, 
 		RULE_listBody = 4;
@@ -31,7 +31,7 @@ public class MissionParser extends Parser {
 
 	private static String[] makeLiteralNames() {
 		return new String[] {
-			null, "':'", "'{'", "'}'", "';'", "'STT'", "'SN'", "'STP'", "'deliveries'", 
+			null, "':'", "'{'", "'}'", "';'", "'STT'", "'MD'", "'STP'", "'deliveries'", 
 			"','", "'mission'"
 		};
 	}
@@ -39,7 +39,7 @@ public class MissionParser extends Parser {
 	private static String[] makeSymbolicNames() {
 		return new String[] {
 			null, null, null, null, null, null, null, null, null, null, "MISSION", 
-			"DATE", "DRONE", "POINT", "WS"
+			"DATE", "MODEL", "POINT", "WS"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -222,6 +222,23 @@ public class MissionParser extends Parser {
 			super.copyFrom(ctx);
 		}
 	}
+	public static class ModelContext extends KeyValuePairContext {
+		public TerminalNode MODEL() { return getToken(MissionParser.MODEL, 0); }
+		public ModelContext(KeyValuePairContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MissionListener ) ((MissionListener)listener).enterModel(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MissionListener ) ((MissionListener)listener).exitModel(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof MissionVisitor ) return ((MissionVisitor<? extends T>)visitor).visitModel(this);
+			else return visitor.visitChildren(this);
+		}
+	}
 	public static class StaringTimeContext extends KeyValuePairContext {
 		public TerminalNode DATE() { return getToken(MissionParser.DATE, 0); }
 		public StaringTimeContext(KeyValuePairContext ctx) { copyFrom(ctx); }
@@ -255,23 +272,6 @@ public class MissionParser extends Parser {
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof MissionVisitor ) return ((MissionVisitor<? extends T>)visitor).visitListOfDeliveries(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-	public static class DroneSerialNumberContext extends KeyValuePairContext {
-		public TerminalNode DRONE() { return getToken(MissionParser.DRONE, 0); }
-		public DroneSerialNumberContext(KeyValuePairContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MissionListener ) ((MissionListener)listener).enterDroneSerialNumber(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MissionListener ) ((MissionListener)listener).exitDroneSerialNumber(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MissionVisitor ) return ((MissionVisitor<? extends T>)visitor).visitDroneSerialNumber(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -313,7 +313,7 @@ public class MissionParser extends Parser {
 				}
 				break;
 			case T__5:
-				_localctx = new DroneSerialNumberContext(_localctx);
+				_localctx = new ModelContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
 				setState(28);
@@ -321,7 +321,7 @@ public class MissionParser extends Parser {
 				setState(29);
 				match(T__0);
 				setState(30);
-				match(DRONE);
+				match(MODEL);
 				}
 				break;
 			case T__6:

@@ -1,5 +1,5 @@
-// Generated from mission\Mission.g4 by ANTLR 4.9.3
-package mission;
+// Generated from org\lprog\grammar\mission\Mission.g4 by ANTLR 4.9.3
+package org.lprog.grammar.mission;
 import org.antlr.v4.runtime.Lexer;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.Token;
@@ -18,7 +18,7 @@ public class MissionLexer extends Lexer {
 		new PredictionContextCache();
 	public static final int
 		T__0=1, T__1=2, T__2=3, T__3=4, T__4=5, T__5=6, T__6=7, T__7=8, T__8=9, 
-		MISSION=10, DATE=11, DRONE=12, POINT=13, WS=14;
+		MISSION=10, DATE=11, MODEL=12, POINT=13, WS=14;
 	public static String[] channelNames = {
 		"DEFAULT_TOKEN_CHANNEL", "HIDDEN"
 	};
@@ -30,14 +30,14 @@ public class MissionLexer extends Lexer {
 	private static String[] makeRuleNames() {
 		return new String[] {
 			"T__0", "T__1", "T__2", "T__3", "T__4", "T__5", "T__6", "T__7", "T__8", 
-			"MISSION", "DATE", "DRONE", "POINT", "WS"
+			"MISSION", "DATE", "MODEL", "POINT", "WS"
 		};
 	}
 	public static final String[] ruleNames = makeRuleNames();
 
 	private static String[] makeLiteralNames() {
 		return new String[] {
-			null, "':'", "'{'", "'}'", "';'", "'STT'", "'SN'", "'STP'", "'deliveries'", 
+			null, "':'", "'{'", "'}'", "';'", "'STT'", "'MD'", "'STP'", "'deliveries'", 
 			"','", "'mission'"
 		};
 	}
@@ -45,7 +45,7 @@ public class MissionLexer extends Lexer {
 	private static String[] makeSymbolicNames() {
 		return new String[] {
 			null, null, null, null, null, null, null, null, null, null, "MISSION", 
-			"DATE", "DRONE", "POINT", "WS"
+			"DATE", "MODEL", "POINT", "WS"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -125,7 +125,7 @@ public class MissionLexer extends Lexer {
 		"\2\2\2\13\'\3\2\2\2\r+\3\2\2\2\17.\3\2\2\2\21\62\3\2\2\2\23=\3\2\2\2\25"+
 		"?\3\2\2\2\27H\3\2\2\2\31e\3\2\2\2\33o\3\2\2\2\35\u0084\3\2\2\2\37 \7<"+
 		"\2\2 \4\3\2\2\2!\"\7}\2\2\"\6\3\2\2\2#$\7\177\2\2$\b\3\2\2\2%&\7=\2\2"+
-		"&\n\3\2\2\2\'(\7U\2\2()\7V\2\2)*\7V\2\2*\f\3\2\2\2+,\7U\2\2,-\7P\2\2-"+
+		"&\n\3\2\2\2\'(\7U\2\2()\7V\2\2)*\7V\2\2*\f\3\2\2\2+,\7O\2\2,-\7F\2\2-"+
 		"\16\3\2\2\2./\7U\2\2/\60\7V\2\2\60\61\7R\2\2\61\20\3\2\2\2\62\63\7f\2"+
 		"\2\63\64\7g\2\2\64\65\7n\2\2\65\66\7k\2\2\66\67\7x\2\2\678\7g\2\289\7"+
 		"t\2\29:\7k\2\2:;\7g\2\2;<\7u\2\2<\22\3\2\2\2=>\7.\2\2>\24\3\2\2\2?@\7"+
