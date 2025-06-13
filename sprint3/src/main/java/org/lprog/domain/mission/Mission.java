@@ -7,22 +7,24 @@ import java.util.List;
 
 public class Mission {
 
+    private static int idCounter = 0;
+
     public int id;
     public Date startDate;
     public Drone drone;
     public Point StartingPoint;
     public List<Point> deliveries;
 
-    public Mission(int id, Date startDate, Drone drone, Point startingPoint, List<Point> deliveries) {
-        this.id = id;
+    public Mission(Date startDate, Drone drone, Point startingPoint, List<Point> deliveries) {
+        this.id = idCounter + 1;
         this.startDate = startDate;
         this.drone = drone;
         this.StartingPoint = startingPoint;
         this.deliveries = deliveries;
     }
 
-    public Mission(int id, Date startDate, Point startingPoint) {
-        this.id = id;
+    public Mission(Date startDate, Point startingPoint) {
+        this.id = idCounter + 1;
         this.startDate = startDate;
         this.StartingPoint = startingPoint;
         this.deliveries = new java.util.ArrayList<>();

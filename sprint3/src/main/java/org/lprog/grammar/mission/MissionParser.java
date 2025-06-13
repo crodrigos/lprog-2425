@@ -1,5 +1,5 @@
-// Generated from org/lprog/grammar/mission/Mission.g4 by ANTLR 4.9.3
-package org.lprog.grammar.mission;
+// Generated from mission\Mission.g4 by ANTLR 4.9.3
+package mission;
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
@@ -18,7 +18,7 @@ public class MissionParser extends Parser {
 		new PredictionContextCache();
 	public static final int
 		T__0=1, T__1=2, T__2=3, T__3=4, T__4=5, T__5=6, T__6=7, T__7=8, T__8=9, 
-		T__9=10, MISSION=11, ID=12, DATE=13, DRONE=14, POINT=15, WS=16;
+		MISSION=10, DATE=11, DRONE=12, POINT=13, WS=14;
 	public static final int
 		RULE_mission = 0, RULE_body = 1, RULE_keyValuePair = 2, RULE_list = 3, 
 		RULE_listBody = 4;
@@ -31,15 +31,15 @@ public class MissionParser extends Parser {
 
 	private static String[] makeLiteralNames() {
 		return new String[] {
-			null, "':'", "'{'", "'}'", "';'", "'ID'", "'STT'", "'SN'", "'STP'", "'deliveries'", 
+			null, "':'", "'{'", "'}'", "';'", "'STT'", "'SN'", "'STP'", "'deliveries'", 
 			"','", "'mission'"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
 	private static String[] makeSymbolicNames() {
 		return new String[] {
-			null, null, null, null, null, null, null, null, null, null, null, "MISSION", 
-			"ID", "DATE", "DRONE", "POINT", "WS"
+			null, null, null, null, null, null, null, null, null, null, "MISSION", 
+			"DATE", "DRONE", "POINT", "WS"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -185,7 +185,7 @@ public class MissionParser extends Parser {
 			setState(22);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__4) | (1L << T__5) | (1L << T__6) | (1L << T__7) | (1L << T__8))) != 0)) {
+			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__4) | (1L << T__5) | (1L << T__6) | (1L << T__7))) != 0)) {
 				{
 				{
 				setState(17);
@@ -220,23 +220,6 @@ public class MissionParser extends Parser {
 		public KeyValuePairContext() { }
 		public void copyFrom(KeyValuePairContext ctx) {
 			super.copyFrom(ctx);
-		}
-	}
-	public static class MissionIDContext extends KeyValuePairContext {
-		public TerminalNode ID() { return getToken(MissionParser.ID, 0); }
-		public MissionIDContext(KeyValuePairContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MissionListener ) ((MissionListener)listener).enterMissionID(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MissionListener ) ((MissionListener)listener).exitMissionID(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MissionVisitor ) return ((MissionVisitor<? extends T>)visitor).visitMissionID(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 	public static class StaringTimeContext extends KeyValuePairContext {
@@ -314,11 +297,11 @@ public class MissionParser extends Parser {
 		KeyValuePairContext _localctx = new KeyValuePairContext(_ctx, getState());
 		enterRule(_localctx, 4, RULE_keyValuePair);
 		try {
-			setState(40);
+			setState(37);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case T__4:
-				_localctx = new MissionIDContext(_localctx);
+				_localctx = new StaringTimeContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
 				setState(25);
@@ -326,11 +309,11 @@ public class MissionParser extends Parser {
 				setState(26);
 				match(T__0);
 				setState(27);
-				match(ID);
+				match(DATE);
 				}
 				break;
 			case T__5:
-				_localctx = new StaringTimeContext(_localctx);
+				_localctx = new DroneSerialNumberContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
 				setState(28);
@@ -338,11 +321,11 @@ public class MissionParser extends Parser {
 				setState(29);
 				match(T__0);
 				setState(30);
-				match(DATE);
+				match(DRONE);
 				}
 				break;
 			case T__6:
-				_localctx = new DroneSerialNumberContext(_localctx);
+				_localctx = new StartingPointContext(_localctx);
 				enterOuterAlt(_localctx, 3);
 				{
 				setState(31);
@@ -350,11 +333,11 @@ public class MissionParser extends Parser {
 				setState(32);
 				match(T__0);
 				setState(33);
-				match(DRONE);
+				match(POINT);
 				}
 				break;
 			case T__7:
-				_localctx = new StartingPointContext(_localctx);
+				_localctx = new ListOfDeliveriesContext(_localctx);
 				enterOuterAlt(_localctx, 4);
 				{
 				setState(34);
@@ -362,18 +345,6 @@ public class MissionParser extends Parser {
 				setState(35);
 				match(T__0);
 				setState(36);
-				match(POINT);
-				}
-				break;
-			case T__8:
-				_localctx = new ListOfDeliveriesContext(_localctx);
-				enterOuterAlt(_localctx, 5);
-				{
-				setState(37);
-				match(T__8);
-				setState(38);
-				match(T__0);
-				setState(39);
 				list();
 				}
 				break;
@@ -421,11 +392,11 @@ public class MissionParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(42);
+			setState(39);
 			match(T__1);
-			setState(43);
+			setState(40);
 			listBody();
-			setState(44);
+			setState(41);
 			match(T__2);
 			}
 		}
@@ -471,19 +442,19 @@ public class MissionParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(50);
+			setState(47);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while (_la==T__9) {
+			while (_la==T__8) {
 				{
 				{
-				setState(46);
-				match(T__9);
-				setState(47);
+				setState(43);
+				match(T__8);
+				setState(44);
 				match(POINT);
 				}
 				}
-				setState(52);
+				setState(49);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
@@ -501,21 +472,20 @@ public class MissionParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\228\4\2\t\2\4\3\t"+
-		"\3\4\4\t\4\4\5\t\5\4\6\t\6\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\3\3\3\3\3\7\3"+
-		"\27\n\3\f\3\16\3\32\13\3\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3"+
-		"\4\3\4\3\4\3\4\5\4+\n\4\3\5\3\5\3\5\3\5\3\6\3\6\7\6\63\n\6\f\6\16\6\66"+
-		"\13\6\3\6\2\2\7\2\4\6\b\n\2\2\28\2\f\3\2\2\2\4\30\3\2\2\2\6*\3\2\2\2\b"+
-		",\3\2\2\2\n\64\3\2\2\2\f\r\7\r\2\2\r\16\7\3\2\2\16\17\7\4\2\2\17\20\5"+
-		"\4\3\2\20\21\7\5\2\2\21\22\7\2\2\3\22\3\3\2\2\2\23\24\5\6\4\2\24\25\7"+
-		"\6\2\2\25\27\3\2\2\2\26\23\3\2\2\2\27\32\3\2\2\2\30\26\3\2\2\2\30\31\3"+
-		"\2\2\2\31\5\3\2\2\2\32\30\3\2\2\2\33\34\7\7\2\2\34\35\7\3\2\2\35+\7\16"+
-		"\2\2\36\37\7\b\2\2\37 \7\3\2\2 +\7\17\2\2!\"\7\t\2\2\"#\7\3\2\2#+\7\20"+
-		"\2\2$%\7\n\2\2%&\7\3\2\2&+\7\21\2\2\'(\7\13\2\2()\7\3\2\2)+\5\b\5\2*\33"+
-		"\3\2\2\2*\36\3\2\2\2*!\3\2\2\2*$\3\2\2\2*\'\3\2\2\2+\7\3\2\2\2,-\7\4\2"+
-		"\2-.\5\n\6\2./\7\5\2\2/\t\3\2\2\2\60\61\7\f\2\2\61\63\7\21\2\2\62\60\3"+
-		"\2\2\2\63\66\3\2\2\2\64\62\3\2\2\2\64\65\3\2\2\2\65\13\3\2\2\2\66\64\3"+
-		"\2\2\2\5\30*\64";
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\20\65\4\2\t\2\4\3"+
+		"\t\3\4\4\t\4\4\5\t\5\4\6\t\6\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\3\3\3\3\3\7"+
+		"\3\27\n\3\f\3\16\3\32\13\3\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4"+
+		"\3\4\5\4(\n\4\3\5\3\5\3\5\3\5\3\6\3\6\7\6\60\n\6\f\6\16\6\63\13\6\3\6"+
+		"\2\2\7\2\4\6\b\n\2\2\2\64\2\f\3\2\2\2\4\30\3\2\2\2\6\'\3\2\2\2\b)\3\2"+
+		"\2\2\n\61\3\2\2\2\f\r\7\f\2\2\r\16\7\3\2\2\16\17\7\4\2\2\17\20\5\4\3\2"+
+		"\20\21\7\5\2\2\21\22\7\2\2\3\22\3\3\2\2\2\23\24\5\6\4\2\24\25\7\6\2\2"+
+		"\25\27\3\2\2\2\26\23\3\2\2\2\27\32\3\2\2\2\30\26\3\2\2\2\30\31\3\2\2\2"+
+		"\31\5\3\2\2\2\32\30\3\2\2\2\33\34\7\7\2\2\34\35\7\3\2\2\35(\7\r\2\2\36"+
+		"\37\7\b\2\2\37 \7\3\2\2 (\7\16\2\2!\"\7\t\2\2\"#\7\3\2\2#(\7\17\2\2$%"+
+		"\7\n\2\2%&\7\3\2\2&(\5\b\5\2\'\33\3\2\2\2\'\36\3\2\2\2\'!\3\2\2\2\'$\3"+
+		"\2\2\2(\7\3\2\2\2)*\7\4\2\2*+\5\n\6\2+,\7\5\2\2,\t\3\2\2\2-.\7\13\2\2"+
+		".\60\7\17\2\2/-\3\2\2\2\60\63\3\2\2\2\61/\3\2\2\2\61\62\3\2\2\2\62\13"+
+		"\3\2\2\2\63\61\3\2\2\2\5\30\'\61";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

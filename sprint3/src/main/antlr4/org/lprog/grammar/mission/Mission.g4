@@ -5,8 +5,7 @@ mission: MISSION ':' '{' body '}' EOF;
 body: (keyValuePair ';')*;
 
 keyValuePair
-    : 'ID' ':' ID                 #MissionID
-    | 'STT' ':' DATE              #StaringTime
+    : 'STT' ':' DATE              #StaringTime
     | 'SN' ':' DRONE              #DroneSerialNumber
     | 'STP' ':' POINT             #StartingPoint
     | 'deliveries' ':' list       #ListOfDeliveries
@@ -18,9 +17,7 @@ listBody: (',' POINT)*;
 
 MISSION: 'mission';
 
-ID     : [A-Z0-9]+ ;
-
-DATE   : [0-9]{4} '-' [0-9]{2} '-' [0-9]{2} ',' [0-9]{2} ':' [0-9]{2};
+DATE   : [0-9]+ '-' [0-9]+ '-' [0-9]+ ',' [0-9]+ ':' [0-9]+;
 
 DRONE  : [A-Z]+ '-' [A-Z0-9]+ ;
 
