@@ -1,6 +1,7 @@
 package org.lprog.domain.mission;
 
 import org.lprog.domain.drone.Drone;
+import org.lprog.domain.model.Model;
 
 import java.util.Date;
 import java.util.List;
@@ -11,14 +12,15 @@ public class Mission {
 
     public int id;
     public Date startDate;
+    public Model model;
     public Drone drone;
     public Point StartingPoint;
     public List<Point> deliveries;
 
-    public Mission(Date startDate, Drone drone, Point startingPoint, List<Point> deliveries) {
+    public Mission(Date startDate, Model model, Point startingPoint, List<Point> deliveries) {
         this.id = idCounter + 1;
         this.startDate = startDate;
-        this.drone = drone;
+        this.model = model;
         this.StartingPoint = startingPoint;
         this.deliveries = deliveries;
     }
@@ -44,6 +46,10 @@ public class Mission {
                 Integer.parseInt(coords[2])
         );
         addPoint(point);
+    }
+
+    public void setModel(Model model) {
+        this.model = model;
     }
 
     public void setDrone(Drone drone) {
