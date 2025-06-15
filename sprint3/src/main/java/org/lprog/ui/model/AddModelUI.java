@@ -12,11 +12,10 @@ import java.io.IOException;
 import java.util.List;
 import java.util.ArrayList;
 import javax.swing.*;
-import java.io.File;
 
 public class AddModelUI implements Runnable{
 
-    Runnable fromFile = new Runnable() {
+    Runnable fromFileJFileChooser = new Runnable() {
         @Override
         public void run() {
             JFileChooser fileChooser = new JFileChooser();
@@ -38,9 +37,26 @@ public class AddModelUI implements Runnable{
         }
     };
 
+    Runnable fromFilepath = new Runnable() {
+        @Override
+        public void run() {
+
+            String fp = ConsoleUtils.readLineFromConsole("Caminho do ficheiro");
+
+            try {
+                List<Model> models = ModelVisitorImpl.GetModelFromFile(fp);
+                ModelRepo modelRepo = App.getInstance().Repos.modelRepo;
+                models.forEach((model) -> {modelRepo.add(model);});
+
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    };
+
     public void run() {
         List<MenuOption> options = new ArrayList<>();
-        options.add(new MenuOption("A partir de ficheiro", fromFile));
+        options.add(new MenuOption("A partir de ficheiro", fromFilepath));
 
         ConsoleUtils.showAndSelectMenu(options,  "Criar novo Modelo de Drone");
     }
