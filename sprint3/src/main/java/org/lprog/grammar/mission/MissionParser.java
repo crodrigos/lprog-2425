@@ -18,13 +18,14 @@ public class MissionParser extends Parser {
 		new PredictionContextCache();
 	public static final int
 		T__0=1, T__1=2, T__2=3, T__3=4, T__4=5, T__5=6, T__6=7, T__7=8, T__8=9, 
-		MISSION=10, DATE=11, MODEL=12, POINT=13, WS=14;
+		T__9=10, T__10=11, MISSION=12, DATE=13, MODEL=14, POINT=15, WS=16;
 	public static final int
 		RULE_file = 0, RULE_mission = 1, RULE_missionEnd = 2, RULE_body = 3, RULE_keyValuePair = 4, 
-		RULE_list = 5, RULE_listBody = 6;
+		RULE_list = 5, RULE_listBody = 6, RULE_point = 7;
 	private static String[] makeRuleNames() {
 		return new String[] {
-			"file", "mission", "missionEnd", "body", "keyValuePair", "list", "listBody"
+			"file", "mission", "missionEnd", "body", "keyValuePair", "list", "listBody", 
+			"point"
 		};
 	}
 	public static final String[] ruleNames = makeRuleNames();
@@ -32,14 +33,14 @@ public class MissionParser extends Parser {
 	private static String[] makeLiteralNames() {
 		return new String[] {
 			null, "':'", "'{'", "'}'", "';'", "'STT'", "'MD'", "'STP'", "'deliveries'", 
-			"','"
+			"'['", "']'", "','"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
 	private static String[] makeSymbolicNames() {
 		return new String[] {
-			null, null, null, null, null, null, null, null, null, null, "MISSION", 
-			"DATE", "MODEL", "POINT", "WS"
+			null, null, null, null, null, null, null, null, null, null, null, null, 
+			"MISSION", "DATE", "MODEL", "POINT", "WS"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -127,21 +128,21 @@ public class MissionParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(17);
+			setState(19);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while (_la==MISSION) {
 				{
 				{
-				setState(14);
+				setState(16);
 				mission();
 				}
 				}
-				setState(19);
+				setState(21);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
-			setState(20);
+			setState(22);
 			match(EOF);
 			}
 		}
@@ -189,15 +190,15 @@ public class MissionParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(22);
-			match(MISSION);
-			setState(23);
-			match(T__0);
 			setState(24);
-			match(T__1);
+			match(MISSION);
 			setState(25);
-			body();
+			match(T__0);
 			setState(26);
+			match(T__1);
+			setState(27);
+			body();
+			setState(28);
 			missionEnd();
 			}
 		}
@@ -238,7 +239,7 @@ public class MissionParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(28);
+			setState(30);
 			match(T__2);
 			}
 		}
@@ -286,19 +287,19 @@ public class MissionParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(35);
+			setState(37);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__4) | (1L << T__5) | (1L << T__6) | (1L << T__7))) != 0)) {
 				{
 				{
-				setState(30);
+				setState(32);
 				keyValuePair();
-				setState(31);
+				setState(33);
 				match(T__3);
 				}
 				}
-				setState(37);
+				setState(39);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
@@ -401,18 +402,18 @@ public class MissionParser extends Parser {
 		KeyValuePairContext _localctx = new KeyValuePairContext(_ctx, getState());
 		enterRule(_localctx, 8, RULE_keyValuePair);
 		try {
-			setState(50);
+			setState(52);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case T__4:
 				_localctx = new StaringTimeContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(38);
-				match(T__4);
-				setState(39);
-				match(T__0);
 				setState(40);
+				match(T__4);
+				setState(41);
+				match(T__0);
+				setState(42);
 				match(DATE);
 				}
 				break;
@@ -420,11 +421,11 @@ public class MissionParser extends Parser {
 				_localctx = new ModelContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(41);
-				match(T__5);
-				setState(42);
-				match(T__0);
 				setState(43);
+				match(T__5);
+				setState(44);
+				match(T__0);
+				setState(45);
 				match(MODEL);
 				}
 				break;
@@ -432,11 +433,11 @@ public class MissionParser extends Parser {
 				_localctx = new StartingPointContext(_localctx);
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(44);
-				match(T__6);
-				setState(45);
-				match(T__0);
 				setState(46);
+				match(T__6);
+				setState(47);
+				match(T__0);
+				setState(48);
 				match(POINT);
 				}
 				break;
@@ -444,11 +445,11 @@ public class MissionParser extends Parser {
 				_localctx = new ListOfDeliveriesContext(_localctx);
 				enterOuterAlt(_localctx, 4);
 				{
-				setState(47);
-				match(T__7);
-				setState(48);
-				match(T__0);
 				setState(49);
+				match(T__7);
+				setState(50);
+				match(T__0);
+				setState(51);
 				list();
 				}
 				break;
@@ -496,12 +497,12 @@ public class MissionParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(52);
-			match(T__1);
-			setState(53);
-			listBody();
 			setState(54);
-			match(T__2);
+			match(T__8);
+			setState(55);
+			listBody();
+			setState(56);
+			match(T__9);
 			}
 		}
 		catch (RecognitionException re) {
@@ -516,9 +517,11 @@ public class MissionParser extends Parser {
 	}
 
 	public static class ListBodyContext extends ParserRuleContext {
-		public List<TerminalNode> POINT() { return getTokens(MissionParser.POINT); }
-		public TerminalNode POINT(int i) {
-			return getToken(MissionParser.POINT, i);
+		public List<PointContext> point() {
+			return getRuleContexts(PointContext.class);
+		}
+		public PointContext point(int i) {
+			return getRuleContext(PointContext.class,i);
 		}
 		public ListBodyContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -546,19 +549,19 @@ public class MissionParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(60);
+			setState(62);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while (_la==T__8) {
+			while (_la==T__10) {
 				{
 				{
-				setState(56);
-				match(T__8);
-				setState(57);
-				match(POINT);
+				setState(58);
+				match(T__10);
+				setState(59);
+				point();
 				}
 				}
-				setState(62);
+				setState(64);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
@@ -575,24 +578,66 @@ public class MissionParser extends Parser {
 		return _localctx;
 	}
 
+	public static class PointContext extends ParserRuleContext {
+		public TerminalNode POINT() { return getToken(MissionParser.POINT, 0); }
+		public PointContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_point; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MissionListener ) ((MissionListener)listener).enterPoint(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MissionListener ) ((MissionListener)listener).exitPoint(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof MissionVisitor ) return ((MissionVisitor<? extends T>)visitor).visitPoint(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final PointContext point() throws RecognitionException {
+		PointContext _localctx = new PointContext(_ctx, getState());
+		enterRule(_localctx, 14, RULE_point);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(65);
+			match(POINT);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\20B\4\2\t\2\4\3\t"+
-		"\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\3\2\7\2\22\n\2\f\2\16\2\25"+
-		"\13\2\3\2\3\2\3\3\3\3\3\3\3\3\3\3\3\3\3\4\3\4\3\5\3\5\3\5\7\5$\n\5\f\5"+
-		"\16\5\'\13\5\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\5\6\65\n"+
-		"\6\3\7\3\7\3\7\3\7\3\b\3\b\7\b=\n\b\f\b\16\b@\13\b\3\b\2\2\t\2\4\6\b\n"+
-		"\f\16\2\2\2@\2\23\3\2\2\2\4\30\3\2\2\2\6\36\3\2\2\2\b%\3\2\2\2\n\64\3"+
-		"\2\2\2\f\66\3\2\2\2\16>\3\2\2\2\20\22\5\4\3\2\21\20\3\2\2\2\22\25\3\2"+
-		"\2\2\23\21\3\2\2\2\23\24\3\2\2\2\24\26\3\2\2\2\25\23\3\2\2\2\26\27\7\2"+
-		"\2\3\27\3\3\2\2\2\30\31\7\f\2\2\31\32\7\3\2\2\32\33\7\4\2\2\33\34\5\b"+
-		"\5\2\34\35\5\6\4\2\35\5\3\2\2\2\36\37\7\5\2\2\37\7\3\2\2\2 !\5\n\6\2!"+
-		"\"\7\6\2\2\"$\3\2\2\2# \3\2\2\2$\'\3\2\2\2%#\3\2\2\2%&\3\2\2\2&\t\3\2"+
-		"\2\2\'%\3\2\2\2()\7\7\2\2)*\7\3\2\2*\65\7\r\2\2+,\7\b\2\2,-\7\3\2\2-\65"+
-		"\7\16\2\2./\7\t\2\2/\60\7\3\2\2\60\65\7\17\2\2\61\62\7\n\2\2\62\63\7\3"+
-		"\2\2\63\65\5\f\7\2\64(\3\2\2\2\64+\3\2\2\2\64.\3\2\2\2\64\61\3\2\2\2\65"+
-		"\13\3\2\2\2\66\67\7\4\2\2\678\5\16\b\289\7\5\2\29\r\3\2\2\2:;\7\13\2\2"+
-		";=\7\17\2\2<:\3\2\2\2=@\3\2\2\2><\3\2\2\2>?\3\2\2\2?\17\3\2\2\2@>\3\2"+
-		"\2\2\6\23%\64>";
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\22F\4\2\t\2\4\3\t"+
+		"\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\3\2\7\2\24\n\2\f\2"+
+		"\16\2\27\13\2\3\2\3\2\3\3\3\3\3\3\3\3\3\3\3\3\3\4\3\4\3\5\3\5\3\5\7\5"+
+		"&\n\5\f\5\16\5)\13\5\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\5"+
+		"\6\67\n\6\3\7\3\7\3\7\3\7\3\b\3\b\7\b?\n\b\f\b\16\bB\13\b\3\t\3\t\3\t"+
+		"\2\2\n\2\4\6\b\n\f\16\20\2\2\2C\2\25\3\2\2\2\4\32\3\2\2\2\6 \3\2\2\2\b"+
+		"\'\3\2\2\2\n\66\3\2\2\2\f8\3\2\2\2\16@\3\2\2\2\20C\3\2\2\2\22\24\5\4\3"+
+		"\2\23\22\3\2\2\2\24\27\3\2\2\2\25\23\3\2\2\2\25\26\3\2\2\2\26\30\3\2\2"+
+		"\2\27\25\3\2\2\2\30\31\7\2\2\3\31\3\3\2\2\2\32\33\7\16\2\2\33\34\7\3\2"+
+		"\2\34\35\7\4\2\2\35\36\5\b\5\2\36\37\5\6\4\2\37\5\3\2\2\2 !\7\5\2\2!\7"+
+		"\3\2\2\2\"#\5\n\6\2#$\7\6\2\2$&\3\2\2\2%\"\3\2\2\2&)\3\2\2\2\'%\3\2\2"+
+		"\2\'(\3\2\2\2(\t\3\2\2\2)\'\3\2\2\2*+\7\7\2\2+,\7\3\2\2,\67\7\17\2\2-"+
+		".\7\b\2\2./\7\3\2\2/\67\7\20\2\2\60\61\7\t\2\2\61\62\7\3\2\2\62\67\7\21"+
+		"\2\2\63\64\7\n\2\2\64\65\7\3\2\2\65\67\5\f\7\2\66*\3\2\2\2\66-\3\2\2\2"+
+		"\66\60\3\2\2\2\66\63\3\2\2\2\67\13\3\2\2\289\7\13\2\29:\5\16\b\2:;\7\f"+
+		"\2\2;\r\3\2\2\2<=\7\r\2\2=?\5\20\t\2><\3\2\2\2?B\3\2\2\2@>\3\2\2\2@A\3"+
+		"\2\2\2A\17\3\2\2\2B@\3\2\2\2CD\7\21\2\2D\21\3\2\2\2\6\25\'\66@";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

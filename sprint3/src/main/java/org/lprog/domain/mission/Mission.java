@@ -11,21 +11,21 @@ public class Mission {
     private static int idCounter = 0;
 
     public int id;
-    public Date startDate;
-    public Model model;
+    public String startDate;
+    public String modelName;
     public Drone drone;
     public Point startingPoint;
     public List<Point> deliveries;
 
-    public Mission(Date startDate, Model model, Point startingPoint, List<Point> deliveries) {
+    public Mission(String startDate, String modelName, Point startingPoint, List<Point> deliveries) {
         this.id = idCounter + 1;
         this.startDate = startDate;
-        this.model = model;
+        this.modelName = modelName;
         this.startingPoint = startingPoint;
         this.deliveries = deliveries;
     }
 
-    public Mission(Date startDate, Point startingPoint) {
+    public Mission(String startDate, Point startingPoint) {
         this.id = idCounter + 1;
         this.startDate = startDate;
         this.startingPoint = startingPoint;
@@ -48,8 +48,8 @@ public class Mission {
         addPoint(point);
     }
 
-    public void setModel(Model model) {
-        this.model = model;
+    public void setModel(String modelName) {
+        this.modelName = modelName;
     }
 
     public void setDrone(Drone drone) {
@@ -65,7 +65,7 @@ public class Mission {
         return "Mission {" +
                 "  ID: " + id +
                 "  Starting Date: " + startDate +
-                "  Model: " + (model != null ? model.ModelName : "No model assigned") +
+                "  Model: " + (modelName != null ? modelName : "No model assigned") +
                 "  Drone: " + (drone != null ? drone.serialNumber : "No drone assigned") +
                 "  Starting Point: " + startingPoint +
                 "  Deliveries: {" + deliveries + "}" +

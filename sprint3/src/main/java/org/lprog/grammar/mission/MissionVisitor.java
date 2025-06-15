@@ -74,4 +74,10 @@ public interface MissionVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitListBody(MissionParser.ListBodyContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MissionParser#point}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPoint(MissionParser.PointContext ctx);
 }

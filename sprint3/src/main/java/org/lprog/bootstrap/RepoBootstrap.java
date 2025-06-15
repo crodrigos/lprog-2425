@@ -72,17 +72,9 @@ public class RepoBootstrap implements Runnable {
     private void AddMissions () {
         ConsoleUtils.printMessageWithColor("\nAdding missions", ConsoleColors.WHITE_BRIGHT);
 
-        Model model = getModel("FX-001");
-
-        if (model == null) {
-            ConsoleUtils.printMessageWithColor("Modelo FX-001 não encontrado no repositório!",
-                    ConsoleColors.RED_BRIGHT);
-            return;
-        }
-
         Mission mission1 = new Mission(
-            new Date(2025, 06, 14),
-                model,
+            "2025-07-27,09:37",
+                "FX-001",
                 new Point(
                     40, // Latitude
                         50, // Altitude

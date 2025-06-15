@@ -15,9 +15,11 @@ keyValuePair
     | 'deliveries' ':' list       #ListOfDeliveries
     ;
 
-list: '{' listBody '}' ;
+list: '[' listBody ']' ;
 
-listBody: (',' POINT)*;
+listBody: (',' point)*;
+
+point: POINT;
 
 MISSION: 'MISSION'|'Mission'|'mission';
 

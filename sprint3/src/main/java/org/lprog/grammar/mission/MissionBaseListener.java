@@ -131,6 +131,18 @@ public class MissionBaseListener implements MissionListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitListBody(MissionParser.ListBodyContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterPoint(MissionParser.PointContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitPoint(MissionParser.PointContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

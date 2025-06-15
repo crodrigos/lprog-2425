@@ -40,7 +40,7 @@ public class MissionUI implements Runnable {
 
     private void manuallyAddMission() {
 
-        Date startDate = ConsoleUtils.readDateFromConsole("Data de início da missão (AAAA-MM-DD,HH:MM): ");
+        String startDate = ConsoleUtils.readLineFromConsole("Data de início da missão (AAAA-MM-DD,HH:MM): ");
 
         String startingPoint = ConsoleUtils.readLineFromConsole("Ponto de partida (latitude,altitude,longitude): ");
         String[] coords = startingPoint.split(",");

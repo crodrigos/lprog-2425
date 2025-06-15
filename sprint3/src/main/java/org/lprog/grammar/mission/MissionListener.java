@@ -115,4 +115,14 @@ public interface MissionListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitListBody(MissionParser.ListBodyContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MissionParser#point}.
+	 * @param ctx the parse tree
+	 */
+	void enterPoint(MissionParser.PointContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MissionParser#point}.
+	 * @param ctx the parse tree
+	 */
+	void exitPoint(MissionParser.PointContext ctx);
 }
