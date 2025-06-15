@@ -28,7 +28,7 @@ public class RepoBootstrap implements Runnable {
     private void AddModels() {
         ConsoleUtils.printMessageWithColor("\nAdding models", ConsoleColors.WHITE_BRIGHT);
         Model model1 = new Model(
-                "FX-001",
+                "FX001",
                 1000,
                 90,
                 30,
