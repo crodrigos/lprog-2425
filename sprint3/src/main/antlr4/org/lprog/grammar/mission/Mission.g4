@@ -1,6 +1,10 @@
 grammar Mission;
 
-mission: MISSION ':' '{' body '}' EOF;
+file: (mission)* EOF;
+
+mission: MISSION ':' '{' body missionEnd;
+
+missionEnd: '}';
 
 body: (keyValuePair ';')*;
 
@@ -15,7 +19,7 @@ list: '{' listBody '}' ;
 
 listBody: (',' POINT)*;
 
-MISSION: 'mission';
+MISSION: 'MISSION'|'Mission'|'mission';
 
 DATE   : [0-9]+ '-' [0-9]+ '-' [0-9]+ ',' [0-9]+ ':' [0-9]+;
 
