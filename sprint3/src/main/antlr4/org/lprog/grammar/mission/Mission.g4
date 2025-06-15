@@ -17,7 +17,7 @@ keyValuePair
 
 list: '[' listBody ']' ;
 
-listBody: (',' point)*;
+listBody: point (',' point)* ;
 
 point: POINT;
 

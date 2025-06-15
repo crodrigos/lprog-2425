@@ -1,9 +1,7 @@
 package org.lprog.domain.mission;
 
 import org.lprog.domain.drone.Drone;
-import org.lprog.domain.model.Model;
 
-import java.util.Date;
 import java.util.List;
 
 public class Mission {
@@ -34,8 +32,6 @@ public class Mission {
 
     public void addPoint (Point point) {
         deliveries.add(point);
-        System.out.println("Point " +
-                point.toString() + "added.");
     }
 
     public void addPoint (String pointString) {
@@ -62,13 +58,13 @@ public class Mission {
 
     @Override
     public String toString() {
-        return "Mission {" +
-                "  ID: " + id +
-                "  Starting Date: " + startDate +
-                "  Model: " + (modelName != null ? modelName : "No model assigned") +
-                "  Drone: " + (drone != null ? drone.serialNumber : "No drone assigned") +
-                "  Starting Point: " + startingPoint +
-                "  Deliveries: {" + deliveries + "}" +
-                "}";
+        return "\nMission {" +
+                "\n  ID: " + id +
+                "\n  Starting Date: " + startDate +
+                "\n  Model: " + (modelName != null ? modelName : "No model assigned") +
+                "\n  Drone: " + (drone != null ? drone.serialNumber : "No drone assigned") +
+                "\n  Starting Point: " + startingPoint +
+                "\n  Deliveries: [" + deliveries + "]" +
+                "\n}";
     }
 }
