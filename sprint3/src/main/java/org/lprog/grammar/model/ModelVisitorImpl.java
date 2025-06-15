@@ -43,7 +43,9 @@ public class ModelVisitorImpl implements ModelVisitor {
 
     @Override
     public Object visitModel(ModelParser.ModelContext ctx) {
-        return ((ModelParser.StructureBodyContext) ctx.children.get(3)).accept(this);
+        ((ModelParser.StructureBodyContext) ctx.children.get(3)).accept(this);
+        ctx.children.get(ctx.getChildCount()-1).accept(this);
+        return null;
     }
 
     @Override
@@ -194,7 +196,7 @@ public class ModelVisitorImpl implements ModelVisitor {
         CommonTokenStream tokens = new CommonTokenStream(lexer);
         ModelParser parser = new ModelParser(tokens);
 
-        ParseTree tree = parser.model();
+        ParseTree tree = parser.file();
         //System.out.println(tree.toStringTree());
 
         ModelVisitorImpl visitor = new ModelVisitorImpl();

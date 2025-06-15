@@ -13,6 +13,7 @@ import org.lprog.domain.model.Sensor;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class ModelLexerTest {
 
@@ -33,19 +34,9 @@ public class ModelLexerTest {
     @DisplayName("Test if Lexer reads from file path")
     public void testExample1Model() throws IOException {
 
-        ModelLexer lexer = new ModelLexer(CharStreams.fromFileName(pathToTestFile));
-        CommonTokenStream tokens = new CommonTokenStream(lexer);
-        ModelParser parser = new ModelParser(tokens);
+        List<Model> models = ModelVisitorImpl.GetModelFromFile(pathToTestFile);
 
-        ParseTree tree = parser.model();
-        //System.out.println(tree.toStringTree());
-
-        ModelVisitorImpl visitor = new ModelVisitorImpl();
-        //visitor.visit(tree);
-        visitor.visit(tree);
-        var model = visitor.GetModels();
-
-        Assertions.assertEquals(model, example1Model);
+        Assertions.assertEquals(models, example1Model);
     }
 
 }

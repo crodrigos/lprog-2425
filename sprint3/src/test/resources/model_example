@@ -1,5 +1,5 @@
 model:{
-    NM:FX-001;
+    NM:FX001;
     CC:20000;
     AT:60;
     VC:20;
@@ -10,7 +10,7 @@ model:{
 }
 
 model:{
-    NM:FX-002;
+    NM:FX002;
     CC:25000;
     AT:30;
     VC:15;
