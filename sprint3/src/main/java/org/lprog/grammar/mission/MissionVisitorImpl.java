@@ -56,19 +56,23 @@ public class MissionVisitorImpl implements MissionVisitor {
 
     @Override
     public Object visitStaringTime(MissionParser.StaringTimeContext ctx) {
-        this.startDate = ctx.getText();
+        this.startDate = ctx.getChild(2).getText();
         return null;
     }
 
     @Override
     public Object visitModel(MissionParser.ModelContext ctx) {
-        this.modelName = ctx.getText();
+        this.modelName = ctx.getChild(2).getText();
         return null;
     }
 
     @Override
     public Object visitStartingPoint(MissionParser.StartingPointContext ctx) {
-        String[] coordinates = ctx.getText().split(",");
+        String rawText = ctx.getChild(2).getText().trim();
+        if (rawText.startsWith("(") && rawText.endsWith(")")) {
+            rawText = rawText.substring(1, rawText.length() - 1); // Remove the parentheses
+        }
+        String[] coordinates = rawText.split(",");
         if (coordinates.length == 3) {
             try {
                 int latitude = Integer.parseInt(coordinates[0].trim());
@@ -88,14 +92,37 @@ public class MissionVisitorImpl implements MissionVisitor {
     @Override
     public Object visitListOfDeliveries(MissionParser.ListOfDeliveriesContext ctx) {
         try {
-            List<Point> deliveries = new ArrayList<>();
+            this.deliveries.clear();
 
-            MissionParser.ListContext limitList = (MissionParser.ListContext) ctx.children.get(2);
-            MissionParser.ListBodyContext limitListBody = (MissionParser.ListBodyContext) limitList.children.get(1);
+            ParseTree listOfPoints = ctx.getChild(2).getChild(1);
+            int numOfPoints = listOfPoints.getChildCount();
+            int numOfPointsSoFar = 0;
 
-            for (int i = 0; i < limitListBody.getChildCount(); i += 2) {
-                MissionParser.PointContext value = (MissionParser.PointContext) limitListBody.getChild(i);
+            for (int i = 0; i < numOfPoints; i++) {
+                if (i % 2 == 0) {
+                    String point = listOfPoints.getChild(i).getText();
+                    if (point.startsWith("(") && point.endsWith(")")) {
+                        point = point.substring(1, point.length() - 1); // Remove the parentheses
+                    }
+                    String[] coordinates = point.split(",");
+                    numOfPointsSoFar++;
+                    if (coordinates.length == 3) {
+                        try {
+                            int latitude = Integer.parseInt(coordinates[0].trim());
+                            int altitude = Integer.parseInt(coordinates[1].trim());
+                            int longitude = Integer.parseInt(coordinates[2].trim());
+                            Point newPoint = new Point(latitude, altitude, longitude);
+                            this.deliveries.add(newPoint);
+                        } catch (NumberFormatException e) {
+                            // Handle invalid number format
+                            System.err.println("Invalid coordinates for point #" + numOfPointsSoFar + " :" + point);
+                        }
+                    } else {
+                        this.deliveries.add(new Point(0,0,0));
+                    }
+                }
             }
+
         } catch (Exception e) {
             this.deliveries = new ArrayList<>();
         }
@@ -119,7 +146,7 @@ public class MissionVisitorImpl implements MissionVisitor {
 
     @Override
     public Object visit(ParseTree parseTree) {
-        return null;
+        return parseTree.accept(this);
     }
 
     @Override
@@ -138,11 +165,12 @@ public class MissionVisitorImpl implements MissionVisitor {
     }
 
     private Mission BuildMission() {
+        List<Point> newDeliveries = new ArrayList<>(deliveries);
         return new Mission(
                 this.startDate,
                 this.modelName,
                 this.startingPoint,
-                this.deliveries
+                newDeliveries
         );
     }
 
@@ -160,6 +188,8 @@ public class MissionVisitorImpl implements MissionVisitor {
 
         MissionVisitorImpl visitor = new MissionVisitorImpl();
         visitor.visit(tree);
-        return visitor.GetMissions();
+        List<Mission> missions = visitor.GetMissions();
+
+        return missions;
     }
 }

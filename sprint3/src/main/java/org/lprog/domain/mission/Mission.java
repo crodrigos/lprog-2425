@@ -1,5 +1,6 @@
 package org.lprog.domain.mission;
 
+import org.lprog.App;
 import org.lprog.domain.drone.Drone;
 
 import java.util.List;
@@ -54,6 +55,24 @@ public class Mission {
 
     public int getId() {
         return id;
+    }
+
+    public double getTotalDistance() {
+        double totalDistance = 0.0;
+        Point lastPoint = startingPoint;
+
+        for (Point delivery : deliveries) {
+            totalDistance += lastPoint.distanceTo(delivery);
+            lastPoint = delivery;
+        }
+
+        totalDistance += lastPoint.distanceTo(startingPoint);
+
+        return totalDistance;
+    }
+
+    public String estimateMissionTotalTime () {
+        return null;
     }
 
     @Override
