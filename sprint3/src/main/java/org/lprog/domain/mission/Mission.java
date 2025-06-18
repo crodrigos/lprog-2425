@@ -3,6 +3,9 @@ package org.lprog.domain.mission;
 import org.lprog.App;
 import org.lprog.domain.drone.Drone;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class Mission {
@@ -10,7 +13,7 @@ public class Mission {
     private static int idCounter = 0;
 
     public int id;
-    public String startDate;
+    public Date startDate;
     public String modelName;
     public Drone drone;
     public Point startingPoint;
@@ -20,7 +23,7 @@ public class Mission {
 
     public Mission(String startDate, String modelName, Point startingPoint, List<Point> deliveries) {
         this.id = idCounter + 1;
-        this.startDate = startDate;
+        this.startDate = parseCustomDate(startDate);
         this.modelName = modelName;
         this.startingPoint = startingPoint;
         this.deliveries = deliveries;
@@ -29,7 +32,7 @@ public class Mission {
 
     public Mission(String startDate, Point startingPoint) {
         this.id = idCounter + 1;
-        this.startDate = startDate;
+        this.startDate = parseCustomDate(startDate);
         this.startingPoint = startingPoint;
         this.deliveries = new java.util.ArrayList<>();
         this.status = Status.Pending;
@@ -85,6 +88,16 @@ public class Mission {
 
     public String estimateMissionTotalTime () {
         return null;
+    }
+
+    public static Date parseCustomDate(String input) {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd,HH:mm");
+        try {
+            return formatter.parse(input);
+        } catch (ParseException e) {
+            System.err.println("Formato inválido: " + input);
+            return null;
+        }
     }
 
     @Override

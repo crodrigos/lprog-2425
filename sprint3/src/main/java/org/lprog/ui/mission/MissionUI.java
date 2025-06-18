@@ -1,6 +1,7 @@
 package org.lprog.ui.mission;
 
 import org.lprog.App;
+import org.lprog.domain.drone.Drone;
 import org.lprog.domain.mission.Mission;
 import org.lprog.domain.mission.Point;
 import org.lprog.grammar.mission.MissionVisitorImpl;
@@ -19,8 +20,16 @@ public class MissionUI implements Runnable {
         options.add(new MenuOption("Carregar missões através de ficheiro", this::loadMissionsMenu));
         options.add(new MenuOption("Criar missão", this::manuallyAddMission));
         options.add(new MenuOption("Listar missões", this::listMissions));
+        options.add(new MenuOption("Associar drone", this::associateDrone));
         options.add(new MenuOption("Exportar missões para ficheiro", this::exportMissionsMenu));
         ConsoleUtils.showAndSelectMenu(options, "Gestão de Missões");
+    }
+
+    private void associateDrone() {
+        Mission missionOption = (Mission) ConsoleUtils.showAndSelectOne(App.getInstance().Repos.missionRepo.repoList, "Selecione uma das missões:");
+        Drone droneOption = (Drone) ConsoleUtils.showAndSelectOne(App.getInstance().Repos.droneRepo.repoList, "Selecione um dos drones:");
+
+        missionOption.setDrone(droneOption);
     }
 
     private void loadMissionsMenu() {
