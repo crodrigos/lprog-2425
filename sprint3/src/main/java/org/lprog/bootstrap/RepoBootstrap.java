@@ -41,14 +41,13 @@ public class RepoBootstrap implements Runnable {
     }
 
     private void AddModel(Model model) {
-        System.out.println(model.toString());
         App.getInstance().Repos.modelRepo.add(model);
     }
 
     private void AddDrones() {
 
         // Buscar o modelo "FX-001" do repositório
-        Model modelo = getModel("FX-001");
+        Model modelo = getModel("FX001");
 
         if (modelo == null) {
             ConsoleUtils.printMessageWithColor("Modelo FX-001 não encontrado no repositório!",
@@ -72,7 +71,7 @@ public class RepoBootstrap implements Runnable {
     private void AddMissions () {
         ConsoleUtils.printMessageWithColor("\nAdding missions", ConsoleColors.WHITE_BRIGHT);
 
-        Model model = getModel("FX-001");
+        Model model = getModel("FX001");
 
         if (model == null) {
             ConsoleUtils.printMessageWithColor("Modelo FX-001 não encontrado no repositório!",
