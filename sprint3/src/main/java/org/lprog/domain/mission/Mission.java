@@ -15,6 +15,8 @@ public class Mission {
     public Drone drone;
     public Point startingPoint;
     public List<Point> deliveries;
+    public Status status;
+
 
     public Mission(String startDate, String modelName, Point startingPoint, List<Point> deliveries) {
         this.id = idCounter + 1;
@@ -22,6 +24,7 @@ public class Mission {
         this.modelName = modelName;
         this.startingPoint = startingPoint;
         this.deliveries = deliveries;
+        this.status = Status.Pending;
     }
 
     public Mission(String startDate, Point startingPoint) {
@@ -29,6 +32,7 @@ public class Mission {
         this.startDate = startDate;
         this.startingPoint = startingPoint;
         this.deliveries = new java.util.ArrayList<>();
+        this.status = Status.Pending;
     }
 
     public void addPoint (Point point) {
@@ -69,6 +73,14 @@ public class Mission {
         totalDistance += lastPoint.distanceTo(startingPoint);
 
         return totalDistance;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    public Status getStatus() {
+        return status;
     }
 
     public String estimateMissionTotalTime () {

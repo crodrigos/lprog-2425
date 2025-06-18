@@ -119,6 +119,13 @@ public class MissionUI implements Runnable {
         }
     }
 
+    private void executeMission() {
+        List<Mission> missions = App.getInstance().Repos.missionRepo.repoList;
+        missions.sort((o1, o2) -> {
+            return 0;
+        });
+    }
+
     private static List<Mission> loadMissions() {
         return App.getInstance().Repos.missionRepo.repoList;
     }
