@@ -18,8 +18,13 @@ public class ModelUI implements Runnable{
             ModelRepo modelRepo = App.getInstance().Repos.modelRepo;
 
             if (!modelRepo.repoList.isEmpty()) {
-                List<String> modelNames = modelRepo.repoList.stream().map(model -> model.ModelName).toList();
-                ConsoleUtils.showList(modelNames,"Modelos Disponiveis");
+                try {
+                    List<String> modelNames = modelRepo.repoList.stream().map(model -> model.ModelName).toList();
+                    String modelName = (String) ConsoleUtils.showAndSelectOne(modelNames,"Modelos Disponiveis");
+
+                    ConsoleUtils.printMessage(App.getInstance().Repos.modelRepo.findByModelName(modelName).toString());
+
+                } catch (Exception e) {}
             }
             else {
                 ConsoleUtils.printMessage("Nenhum modelo de drone encontrado");

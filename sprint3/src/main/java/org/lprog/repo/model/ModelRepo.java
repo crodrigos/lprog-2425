@@ -25,4 +25,13 @@ public class ModelRepo extends Repo<Model> {
 
     }
 
+    /**
+     *
+     * @param modelName
+     * @return Model or Null if not found
+     */
+    public Model findByModelName(String modelName) {
+        return this.repoList.stream().filter(model -> model.ModelName.equals(modelName)).findFirst().orElse(null);
+    }
+
 }
