@@ -1,4 +1,4 @@
-// Generated from org\lprog\grammar\mission\Mission.g4 by ANTLR 4.9.3
+// Generated from org/lprog/grammar/mission/Mission.g4 by ANTLR 4.9.3
 package org.lprog.grammar.mission;
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
@@ -11,11 +11,23 @@ import org.antlr.v4.runtime.tree.ParseTreeVisitor;
  */
 public interface MissionVisitor<T> extends ParseTreeVisitor<T> {
 	/**
+	 * Visit a parse tree produced by {@link MissionParser#file}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFile(MissionParser.FileContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link MissionParser#mission}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitMission(MissionParser.MissionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MissionParser#missionEnd}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitMissionEnd(MissionParser.MissionEndContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link MissionParser#body}.
 	 * @param ctx the parse tree
@@ -62,4 +74,10 @@ public interface MissionVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitListBody(MissionParser.ListBodyContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MissionParser#point}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPoint(MissionParser.PointContext ctx);
 }

@@ -3,9 +3,12 @@ package org.lprog.ui.mission;
 import org.lprog.App;
 import org.lprog.domain.mission.Mission;
 import org.lprog.domain.mission.Point;
+import org.lprog.grammar.mission.MissionVisitorImpl;
+import org.lprog.repo.mission.MissionRepo;
 import org.lprog.ui.utils.ConsoleUtils.ConsoleUtils;
 import org.lprog.ui.utils.ConsoleUtils.MenuOption;
 
+import java.io.PrintWriter;
 import java.util.*;
 
 public class MissionUI implements Runnable {
@@ -31,18 +34,50 @@ public class MissionUI implements Runnable {
     }
 
     private void loadMissionsFromFile(String filePath) {
-        // FALTA ISTO
+        try {
+            List<Mission> missions = MissionVisitorImpl.GetMissionFromFile(filePath);
+            MissionRepo missionsRepo = App.getInstance().Repos.missionRepo;
+            missions.forEach((mission) -> {missionsRepo.add(mission);});
+        } catch (Exception e) {
+            ConsoleUtils.printError("Erro ao carregar missões do ficheiro: " + e.getMessage());
+        }
     }
 
     private void exportMissionsToFile(String fileName) {
-        // FALTA ISTO
+        if (fileName == null || fileName.isEmpty()) {
+            fileName = "missoes-exported.txt";
+        }
+
+        try (PrintWriter writer = new PrintWriter(fileName)) {
+            List<Mission> missions = loadMissions();
+
+            if (missions.isEmpty()) {
+                ConsoleUtils.printMessage("Nenhuma missão para exportar.");
+                return;
+            }
+            for (Mission mission : missions) {
+                writer.println(mission.toString());
+            }
+            ConsoleUtils.printMessage("Missões exportadas com sucesso para " + fileName);
+        } catch (Exception e) {
+            ConsoleUtils.printError("Erro ao exportar missões: " + e.getMessage());
+        }
     }
 
     private void manuallyAddMission() {
 
-        Date startDate = ConsoleUtils.readDateFromConsole("Data de início da missão (AAAA-MM-DD,HH:MM): ");
+        String startDate = ConsoleUtils.readLineFromConsole("Data de início da missão (AAAA-MM-DD,HH:MM): ");
 
         String startingPoint = ConsoleUtils.readLineFromConsole("Ponto de partida (latitude,altitude,longitude): ");
+        try {
+            String[] coords = startingPoint.split(",");
+            if (coords.length != 3) {
+                throw new NumberFormatException("Formato inválido. Use 'latitude,altitude,longitude'.");
+            }
+        } catch (NumberFormatException e) {
+            ConsoleUtils.printMessage("Formato inválido. Use 'latitude,altitude,longitude'.");
+            return;
+        }
         String[] coords = startingPoint.split(",");
         Point startingPointObj = new Point(Double.parseDouble(coords[0]),
                 Double.parseDouble(coords[1]),
@@ -50,8 +85,8 @@ public class MissionUI implements Runnable {
 
         Mission mission = new Mission(startDate, startingPointObj);
 
-        System.out.println("Insira os pontos para entrega linha por linha,");
-        System.out.println("ou 'fim' para terminar a inserção de pontos.");
+        ConsoleUtils.printMessage("Insira os pontos para entrega linha por linha,");
+        ConsoleUtils.printMessage("ou 'fim' para terminar a inserção de pontos.");
 
         while (true) {
             String input = ConsoleUtils.readLineFromConsole("Ponto de entrega: ");
@@ -65,17 +100,13 @@ public class MissionUI implements Runnable {
             }
         }
 
-        int index = ConsoleUtils.showAndSelectIndex(App.getInstance().Repos.droneRepo.repoList,
-                "Selecione o drone para esta missão: ");
-        if (index < 0 || index >= App.getInstance().Repos.droneRepo.repoList.size()) {
-            ConsoleUtils.printMessage("Seleção inválida. Missão não adicionada.");
-            ConsoleUtils.printMessage("Estes são os drones disponíveis:");
-            ConsoleUtils.showList(App.getInstance().Repos.droneRepo.repoList, "Drones Disponíveis");
-            return;
-        }
-        mission.setDrone(App.getInstance().Repos.droneRepo.repoList.get(index));
+        String modelName = ConsoleUtils.readLineFromConsole("Nome do modelo do drone: ");
+
+        mission.setModel(modelName);
+        
         App.getInstance().Repos.missionRepo.repoList.add(mission);
         ConsoleUtils.printMessage("Missão adicionada com sucesso!");
+        ConsoleUtils.printMessage("Missão: " + mission);
 
     }
 

@@ -1,6 +1,10 @@
 grammar Mission;
 
-mission: MISSION ':' '{' body '}' EOF;
+file: (mission)* EOF;
+
+mission: MISSION ':' '{' body missionEnd;
+
+missionEnd: '}';
 
 body: (keyValuePair ';')*;
 
@@ -11,11 +15,13 @@ keyValuePair
     | 'deliveries' ':' list       #ListOfDeliveries
     ;
 
-list: '{' listBody '}' ;
+list: '[' listBody ']' ;
 
-listBody: (',' POINT)*;
+listBody: point (',' point)* ;
 
-MISSION: 'mission';
+point: POINT;
+
+MISSION: 'MISSION'|'Mission'|'mission';
 
 DATE   : [0-9]+ '-' [0-9]+ '-' [0-9]+ ',' [0-9]+ ':' [0-9]+;
 
