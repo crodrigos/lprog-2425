@@ -28,9 +28,24 @@ public class MissionUI implements Runnable {
         options.add(new MenuOption("Criar missão", this::manuallyAddMission));
         options.add(new MenuOption("Listar missões", this::listMissions));
         options.add(new MenuOption("Associar drone", this::associateDrone));
+        options.add(new MenuOption("Associar Modelo", this::associateModel));
         options.add(new MenuOption("Exportar missões para ficheiro", this::exportMissionsMenu));
         options.add(new MenuOption("Executar missão", this::executeMission));
         ConsoleUtils.showAndSelectMenu(options, "Gestão de Missões");
+    }
+
+    private void addMissionToRepo (Mission mission) {
+        MissionRepo missionsRepo = App.getInstance().Repos.missionRepo;
+
+        if (mission.modelName != null) {
+            mission.setModel(App.getInstance().Repos.modelRepo.findByModelName(mission.modelName));
+            if (mission.model == null)
+                ConsoleUtils.printMessage("Não foi encontrado um modelo para esse nome, por favor adicione-o manualmente depois.");
+        }
+
+        missionsRepo.add(mission);
+        ConsoleUtils.printMessage("Missão adicionada com sucesso!");
+        ConsoleUtils.printMessage("Missão: " + mission);
     }
 
     private void associateDrone() {
@@ -38,6 +53,14 @@ public class MissionUI implements Runnable {
         Drone droneOption = (Drone) ConsoleUtils.showAndSelectOne(App.getInstance().Repos.droneRepo.repoList, "Selecione um dos drones:");
 
         missionOption.setDrone(droneOption);
+    }
+
+    private void associateModel() {
+        Mission missionOption = (Mission) ConsoleUtils.showAndSelectOne(App.getInstance().Repos.missionRepo.repoList, "Selecione uma das missões:");
+        Model modelOption = (Model) ConsoleUtils.showAndSelectOne(App.getInstance().Repos.modelRepo.repoList, "Selecione um dos modelos:");
+
+        missionOption.setModel(modelOption);
+        missionOption.setModelName(modelOption.ModelName);
     }
 
     private void loadMissionsMenu() {
@@ -53,8 +76,7 @@ public class MissionUI implements Runnable {
     private void loadMissionsFromFile(String filePath) {
         try {
             List<Mission> missions = MissionVisitorImpl.GetMissionFromFile(filePath);
-            MissionRepo missionsRepo = App.getInstance().Repos.missionRepo;
-            missions.forEach((mission) -> {missionsRepo.add(mission);});
+            missions.forEach((mission) -> {addMissionToRepo(mission);});
         } catch (Exception e) {
             ConsoleUtils.printError("Erro ao carregar missões do ficheiro: " + e.getMessage());
         }
@@ -119,12 +141,9 @@ public class MissionUI implements Runnable {
 
         String modelName = ConsoleUtils.readLineFromConsole("Nome do modelo do drone: ");
 
-        mission.setModel(modelName);
-        
-        App.getInstance().Repos.missionRepo.repoList.add(mission);
-        ConsoleUtils.printMessage("Missão adicionada com sucesso!");
-        ConsoleUtils.printMessage("Missão: " + mission);
+        mission.setModelName(modelName);
 
+        addMissionToRepo(mission);
     }
 
     private void listMissions() {

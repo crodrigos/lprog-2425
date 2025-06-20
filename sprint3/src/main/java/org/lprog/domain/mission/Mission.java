@@ -16,6 +16,7 @@ public class Mission {
     public int id;
     public Date startDate;
     public String modelName;
+    public Model model;
     public Drone drone;
     public Point startingPoint;
     public List<Point> deliveries;
@@ -53,7 +54,11 @@ public class Mission {
         addPoint(point);
     }
 
-    public void setModel(String modelName) {
+    public void setModel(Model model) {
+        this.model = model;
+    }
+
+    public void setModelName (String modelName) {
         this.modelName = modelName;
     }
 
