@@ -8,6 +8,7 @@ import org.lprog.ui.utils.ConsoleUtils.ConsoleUtils;
 import org.lprog.ui.utils.ConsoleUtils.MenuOption;
 import org.lprog.ui.utils.FileDialog;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.ArrayList;
@@ -41,10 +42,11 @@ public class AddModelUI implements Runnable{
         @Override
         public void run() {
 
-            String fp = ConsoleUtils.readLineFromConsole("Caminho do ficheiro");
+            FileDialog fileDialog = new FileDialog();
+            File file = fileDialog.getFile();
 
             try {
-                List<Model> models = ModelVisitorImpl.GetModelFromFile(fp);
+                List<Model> models = ModelVisitorImpl.GetModelFromFile(file.getAbsolutePath());
                 ModelRepo modelRepo = App.getInstance().Repos.modelRepo;
                 models.forEach((model) -> {modelRepo.add(model);});
 
