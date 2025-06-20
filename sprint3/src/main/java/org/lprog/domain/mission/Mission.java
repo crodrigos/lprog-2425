@@ -188,6 +188,7 @@ public class Mission {
                 "\n  Model: " + (modelName != null ? modelName : "No model assigned") +
                 "\n  Drone: " + (drone != null ? drone.serialNumber : "No drone assigned") +
                 "\n  Starting Point: " + startingPoint +
+                "\n  Status: " + status +
                 "\n  Deliveries: [" + deliveries + "]" +
                 "\n}";
     }

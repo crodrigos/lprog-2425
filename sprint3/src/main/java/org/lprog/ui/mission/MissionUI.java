@@ -196,16 +196,19 @@ public class MissionUI implements Runnable {
             }
         }
 
-        if (mission.startDate.compareTo(Calendar.getInstance().getTime())>0) {
+        Date now = Calendar.getInstance().getTime();
+
+        if (mission.startDate.compareTo(now)<0) {
+
+
             ConsoleUtils.printMessage("A missão está marcada para executar na data " + mission.startDate.toString());
+            ConsoleUtils.printMessage("Dia de Hoje: " + now.toString());
+
             List<String> opts = new ArrayList<>();
             opts.add("Sim");
             opts.add("Nao");
             int i = ConsoleUtils.selectsIndex(opts, "Tem a certeza que deseja executar a missão de qualquer maneira?");
-
             if (i==1) return;
-
-
 
         }
 
@@ -218,6 +221,9 @@ public class MissionUI implements Runnable {
         mission.drone = d;
         mission.setStatus(Status.Ongoing);
         d.status = org.lprog.domain.drone.Status.FLYN;
+
+        ConsoleUtils.printMessage(mission.toString());
+        ConsoleUtils.printMessage("Duração da missão: " + mission.CalculateMissionDuration()/60 + " minutos");
     }
 
     private void updateMissionsAndDrones() {

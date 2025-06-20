@@ -31,9 +31,9 @@ public class RepoBootstrap implements Runnable {
                 "FX001",
                 1000,
                 9000,
-                3000,
-                2000,
-                25,
+                153,
+                10,
+                10,
                 new ArrayList<Sensor>(),
                 new ArrayList<String>());
 
