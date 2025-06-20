@@ -27,7 +27,7 @@ public class RepoBootstrap implements Runnable {
     private void AddModels() {
         ConsoleUtils.printMessageWithColor("\nAdding models", ConsoleColors.WHITE_BRIGHT);
         Model model1 = new Model(
-                "FX-001",
+                "FX001",
                 1000,
                 9000,
                 3000,
@@ -48,7 +48,7 @@ public class RepoBootstrap implements Runnable {
         ConsoleUtils.printMessageWithColor("\nAdding Drones", ConsoleColors.WHITE_BRIGHT);
 
         // Buscar o modelo "FX-001" do repositório
-        Model modelo = getModel("FX-001");
+        Model modelo = getModel("FX001");
 
         if (modelo == null) {
             ConsoleUtils.printMessageWithColor("Modelo FX-001 não encontrado no repositório!",
@@ -74,11 +74,11 @@ public class RepoBootstrap implements Runnable {
 
         Mission mission1 = new Mission(
             "2025-07-27,09:37",
-                "FX-001",
+                "FX001",
                 new Point(
-                    40, // Latitude
-                        50, // Altitude
-                    -74// Longitude
+                    90, // Latitude
+                        90, // Altitude
+                    -90// Longitude
                 ),
                 genPointsList(6)
 
@@ -96,9 +96,9 @@ public class RepoBootstrap implements Runnable {
     private ArrayList<Point> genPointsList(int numOfPoints) {
         ArrayList<Point> points = new ArrayList<>();
         for (int i = 0; i < numOfPoints; i++) {
-            int latitude = (int) 90 + 1*i; // Latitude range: -90 to 90
-            int longitude = (int) 90 + 1*i; // Longitude range: -180 to 180
-            int altitude = (int) 90 + 1*i; // Altitude range: 0 to 999
+            double latitude = 90 + 0.001*i; // Latitude range: -90 to 90
+            double longitude = 90 + 0.001*i; // Longitude range: -180 to 180
+            double altitude = 90 + 0.001*i; // Altitude range: 0 to 999
 
             Point point = new Point(latitude, altitude, longitude);
             points.add(point);
