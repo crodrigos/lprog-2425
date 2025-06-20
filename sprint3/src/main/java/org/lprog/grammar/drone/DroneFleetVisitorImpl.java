@@ -25,42 +25,81 @@ public class DroneFleetVisitorImpl extends DroneFleetBaseVisitor<Drone> {
         Status status = null;
 
         for (var atributo : ctx.atributos().atributo()) {
-            if (atributo.getStart().getText().equals("SN")) {
-                sn = atributo.IDENT().getText();
-                if (sn.length() != 10 || sn.charAt(1) != '-') {
-                    throw new RuntimeException("Número de série inválido: " + sn);
-                }
+            String chave = atributo.getStart().getText();
 
-            } else if (atributo.getStart().getText().equals("TV")) {
-                tv = Integer.parseInt(atributo.INT().getText());
-
-            } else if (atributo.getStart().getText().equals("MD")) {
-                String modelName = atributo.IDENT().getText();
-                model = modelosDisponiveis.get(modelName);
-                if (model == null) {
-                    throw new RuntimeException("Modelo não encontrado: " + modelName);
-                }
-
-            } else if (atributo.getStart().getText().equals("RT")) {
-                if (atributo.restrictionList() != null) {
-                    for (var s : atributo.restrictionList().STRING()) {
-                        restrictions.add(cleanQuoted(s.getText()));
+            try {
+                switch (chave) {
+                    case "SN" -> {
+                        if (atributo.IDENT() == null) {
+                            erro(atributo, "Número de série ausente ou mal formado.");
+                        }
+                        sn = atributo.IDENT().getText();
+                        if (sn.length() != 10 || sn.charAt(1) != '-') {
+                            erro(atributo, "Número de série inválido: " + sn);
+                        }
                     }
+
+                    case "TV" -> {
+                        if (atributo.INT() == null) {
+                            erro(atributo, "Valor de tempo de voo ausente ou inválido.");
+                        }
+                        tv = Integer.parseInt(atributo.INT().getText());
+                    }
+
+                    case "MD" -> {
+                        if (atributo.IDENT() == null) {
+                            erro(atributo, "Modelo ausente ou inválido.");
+                        }
+                        String modelName = atributo.IDENT().getText();
+                        model = modelosDisponiveis.get(modelName);
+                        if (model == null) {
+                            erro(atributo, "Modelo não encontrado: " + modelName);
+                        }
+                    }
+
+                    case "RT" -> {
+                        if (atributo.restrictionList() != null) {
+                            for (var s : atributo.restrictionList().STRING()) {
+                                restrictions.add(cleanQuoted(s.getText()));
+                            }
+                        }
+                    }
+
+                    case "EA" -> {
+                        if (atributo.STATUS() == null) {
+                            erro(atributo, "Estado da aeronave ausente ou inválido.");
+                        }
+                        try {
+                            status = Status.valueOf(atributo.STATUS().getText());
+                        } catch (IllegalArgumentException e) {
+                            erro(atributo, "Estado desconhecido: " + atributo.STATUS().getText());
+                        }
+                    }
+
+                    default -> erro(atributo, "Atributo desconhecido: " + chave);
                 }
 
-            } else if (atributo.getStart().getText().equals("EA")) {
-                status = Status.valueOf(atributo.STATUS().getText());
+            } catch (RuntimeException e) {
+                // Propaga erro com linha associada
+                throw new RuntimeException(
+                    "Erro na linha " + atributo.getStart().getLine() + ": " + e.getMessage(), e
+                );
             }
         }
 
         if (sn == null || tv == null || model == null || status == null) {
-            throw new RuntimeException("Campos obrigatórios em falta ao criar drone.");
+            throw new RuntimeException("Campos obrigatórios em falta ao criar drone. Linha " +
+                                       ctx.getStart().getLine());
         }
 
         return new Drone(sn, tv, model, restrictions, status);
     }
 
+    private void erro(DroneFleetParser.AtributoContext ctx, String mensagem) {
+        throw new RuntimeException("Linha " + ctx.getStart().getLine() + ": " + mensagem);
+    }
+
     private String cleanQuoted(String text) {
-        return text.substring(1, text.length() - 1);
+        return text.substring(1, text.length() - 1); // Remove aspas
     }
 }

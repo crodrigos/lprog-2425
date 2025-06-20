@@ -1,0 +1,56 @@
+drone: {
+    SN:D-R0DR1G0S;
+    TV:1200;
+    MD:FX-001;
+    RT:["Vira mal para a esquerda", "Não tem GPS funcional"];
+    EA:CHRG;
+}
+
+drone: {
+    SN:D-12345678;
+    TV:300;
+    MD:FX-001;
+    RT:["Vira mal para a esquerda", "Não tem GPS funcional"];
+    EA:CHRG;
+}
+
+drone: {
+    SN:D-87654321;
+    TV:1500;
+    MD:FX-001;
+    RT:["Vira mal para a esquerda", "Não tem GPS funcional"];
+    EA:CHRG;
+}
+
+
+drone: {
+    SN:D-INVALIDO;
+    TV:100;
+    MD:FX-002;
+    RT:["Modelo não existe"];
+    EA:CHRG;
+}
+
+
+drone: {
+    SN:D-INVALIDO;
+    TV:300;
+    MD:FX-001;
+    RT:["Estado não existe"];
+    EA:CHRGING;
+}
+
+drone: {
+    SN:D-INV;
+    TV:300;
+    MD:FX-001;
+    RT:["Serial Number não cumpre as regras X-XXXXXXXX"];
+    EA:CHRGING;
+}
+
+drone: {
+    SN:D-INV;
+    TV:300;
+    MD:FX-001;
+    RT:["Falta o estado"];
+}
