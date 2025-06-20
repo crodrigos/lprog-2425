@@ -61,9 +61,13 @@ public class DroneUI implements Runnable {
 
             DroneFleetParser.FleetContext fleet = (DroneFleetParser.FleetContext) tree;
             for (DroneFleetParser.DroneEntryContext droneCtx : fleet.droneEntry()) {
-                Drone drone = visitor.visitDroneEntry(droneCtx);
-                App.getInstance().Repos.droneRepo.repoList.add(drone);
-                System.out.println("Drone carregado: " + drone.serialNumber);
+                try {
+                    Drone drone = visitor.visitDroneEntry(droneCtx);
+                    App.getInstance().Repos.droneRepo.repoList.add(drone);
+                    System.out.println("Drone carregado: " + drone.serialNumber);
+                } catch (Exception e) {
+                    ConsoleUtils.printError("Erro ao carregar frota: " + e.getMessage());
+                }
             }
 
         } catch (Exception e) {

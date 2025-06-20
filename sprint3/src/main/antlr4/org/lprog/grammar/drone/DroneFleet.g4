@@ -18,7 +18,7 @@ restrictionList: STRING (',' STRING)* ;
 
 STATUS: 'FLYN' | 'IDLE' | 'CHRG' | 'MNTC' | 'UNAV';
 
-IDENT: [A-Z]+ '-' [A-Z0-9]+ ;
+IDENT: [a-zA-Z_]([a-zA-Z0-9_]|'-')*  ;
 STRING: '"' (~["\r\n])* '"' ;
 INT: [0-9]+ ;
 
