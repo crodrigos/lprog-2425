@@ -4,8 +4,12 @@ import org.lprog.App;
 import org.lprog.domain.drone.Drone;
 import org.lprog.domain.mission.Mission;
 import org.lprog.domain.mission.Point;
+import org.lprog.domain.mission.Status;
+import org.lprog.domain.model.Model;
 import org.lprog.grammar.mission.MissionVisitorImpl;
+import org.lprog.repo.drone.DroneRepo;
 import org.lprog.repo.mission.MissionRepo;
+import org.lprog.repo.model.ModelRepo;
 import org.lprog.ui.utils.ConsoleUtils.ConsoleUtils;
 import org.lprog.ui.utils.ConsoleUtils.MenuOption;
 
@@ -16,12 +20,16 @@ public class MissionUI implements Runnable {
 
     @Override
     public void run() {
+
+        updateMissionsAndDrones();
+
         List<MenuOption> options = new ArrayList<>();
         options.add(new MenuOption("Carregar missões através de ficheiro", this::loadMissionsMenu));
         options.add(new MenuOption("Criar missão", this::manuallyAddMission));
         options.add(new MenuOption("Listar missões", this::listMissions));
         options.add(new MenuOption("Associar drone", this::associateDrone));
         options.add(new MenuOption("Exportar missões para ficheiro", this::exportMissionsMenu));
+        options.add(new MenuOption("Executar missão", this::executeMission));
         ConsoleUtils.showAndSelectMenu(options, "Gestão de Missões");
     }
 
@@ -131,8 +139,130 @@ public class MissionUI implements Runnable {
     private void executeMission() {
         List<Mission> missions = App.getInstance().Repos.missionRepo.repoList;
         missions.sort((o1, o2) -> {
-            return 0;
+            return o1.startDate.compareTo(o2.startDate);
         });
+
+        Mission mission = (Mission) ConsoleUtils.showAndSelectOne(missions, "Selecione uma Missão a ser executada");
+
+        // Verificar se missão existe e se é valida
+        if (mission != null) {
+            DroneRepo droneRepo = App.getInstance().Repos.droneRepo;
+            ModelRepo modelRepo = App.getInstance().Repos.modelRepo;
+
+            Model m = modelRepo.findByModelName(mission.modelName);
+
+            double missionLenght = mission.CalculateMissionLength();
+
+            if (m==null || m.Autonomy<missionLenght) {
+
+                if (m==null) ConsoleUtils.printError("Não existe modelo associado a missão");
+                else if (m.Autonomy<missionLenght) ConsoleUtils.printError("Modelo " + m.ModelName + " não é adequado para missão");
+
+                // Checkar repo de modelos para ver se existe algum modelo que possa fazer as deliveries
+                List<Model> goodModels = searchModelsForMission(mission);
+
+                Model newModel = (Model) ConsoleUtils.showAndSelectOne(goodModels, "Selecionar novo modelo para executar missão");
+
+                mission.modelName = newModel.ModelName;
+            }
+        }
+        else {
+            ConsoleUtils.printMessage("Não existem modelos associados a esta missão");
+
+            List<Model> goodModels = searchModelsForMission(mission);
+
+            if (!goodModels.isEmpty()) {
+                Model newModel = (Model) ConsoleUtils.showAndSelectOne(goodModels, "Selecionar novo modelo para executar missão");
+                mission.modelName = newModel.ModelName;
+            }
+        }
+
+        if (mission.startDate.compareTo(Calendar.getInstance().getTime())<0) {
+            ConsoleUtils.printMessage("A missão está marcada para executar na data " + mission.startDate.toString());
+            List<String> opts = new ArrayList<>();
+            opts.add("Sim");
+            opts.add("Nao");
+            int i = ConsoleUtils.selectsIndex(opts, "Tem a certeza que deseja executar a missão de qualquer maneira?");
+
+            if (i==1) return;
+
+            ConsoleUtils.printMessage("A procurar drone para executar missão...");
+
+            Model m = App.getInstance().Repos.modelRepo.findByModelName(mission.modelName);
+
+            Drone d = (Drone) ConsoleUtils.showAndSelectOne(searchAvailableDronesByModel(m), "Selecionar drone para executar");
+
+            mission.drone = d;
+            mission.setStatus(Status.Ongoing);
+            d.status = org.lprog.domain.drone.Status.FLYN;
+
+        }
+    }
+
+    private void updateMissionsAndDrones() {
+
+        List<Mission> missions = App.getInstance().Repos.missionRepo.repoList;
+
+        Date now = Calendar.getInstance().getTime();
+
+        ConsoleUtils.printMessage(now.toString());
+
+        for (Mission mission : missions) {
+            double duration = mission.CalculateMissionDuration();
+
+            Date expectedEnd = addSecondsToDate(mission.startDate, duration);
+
+            if (expectedEnd.compareTo(now)>0) {
+
+                ConsoleUtils.printMessage(expectedEnd.toString());
+
+                mission.status = Status.Done;
+
+                if (mission.drone!=null) {
+                    mission.drone.status = org.lprog.domain.drone.Status.IDLE;
+                }
+
+            }
+        }
+    }
+
+    public Date addSecondsToDate(Date date, double seconds) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.add(Calendar.SECOND, (int) seconds);
+        return calendar.getTime();
+    }
+
+    private List<Drone> searchAvailableDronesByModel(Model model) {
+        List<Drone> droneList = new ArrayList<>();
+
+        List<Drone> allDrone = App.getInstance().Repos.droneRepo.repoList;
+
+        for (Drone drone : allDrone) {
+            if (drone.model.equals(model)) {
+                droneList.add(drone);
+            }
+        }
+
+        return droneList;
+    }
+
+    private List<Model> searchModelsForMission(Mission mission) {
+        ConsoleUtils.printMessage("A procurar possiveis modelos para executar missão...");
+
+        ConsoleUtils.printMessage("Distancia da missão" + mission.getTotalDistance());
+
+        List<Model> goodModels = new ArrayList<>();
+        App.getInstance().Repos.modelRepo.repoList.forEach(model -> {
+            ConsoleUtils.printMessage(model.ModelName + ": " + model.Autonomy);
+            if (model.Autonomy>=mission.getTotalDistance()) goodModels.add(model);
+        });
+
+        if (goodModels.isEmpty()) {
+            ConsoleUtils.printError("Não existem modelos capazes de executar a missão");
+        }
+
+        return goodModels;
     }
 
     private static List<Mission> loadMissions() {

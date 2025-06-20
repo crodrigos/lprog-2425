@@ -54,4 +54,35 @@ public class Point {
         double horizontalDistance = 6371e3 * c; // Earth radius in meters
         return Math.sqrt(horizontalDistance * horizontalDistance + altDiff * altDiff);
     }
+
+    public static double distance3D(Point a, Point b) {
+        double earthRadius = 6371e3; // Raio médio da Terra em metros
+
+        // Converter latitude e longitude para radianos
+        double lat1 = Math.toRadians(a.latitude);
+        double lon1 = Math.toRadians(a.longitude);
+        double lat2 = Math.toRadians(b.latitude);
+        double lon2 = Math.toRadians(b.longitude);
+
+        // Altitude total (considerando raio da Terra)
+        double r1 = earthRadius + a.altitude;
+        double r2 = earthRadius + b.altitude;
+
+        // Converter para coordenadas cartesianas
+        double x1 = r1 * Math.cos(lat1) * Math.cos(lon1);
+        double y1 = r1 * Math.cos(lat1) * Math.sin(lon1);
+        double z1 = r1 * Math.sin(lat1);
+
+        double x2 = r2 * Math.cos(lat2) * Math.cos(lon2);
+        double y2 = r2 * Math.cos(lat2) * Math.sin(lon2);
+        double z2 = r2 * Math.sin(lat2);
+
+        // Distância euclidiana
+        return Math.sqrt(
+                Math.pow(x2 - x1, 2) +
+                        Math.pow(y2 - y1, 2) +
+                        Math.pow(z2 - z1, 2)
+        );
+    }
+
 }

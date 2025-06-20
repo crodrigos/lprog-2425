@@ -30,9 +30,9 @@ public class RepoBootstrap implements Runnable {
         Model model1 = new Model(
                 "FX001",
                 1000,
-                90,
-                30,
-                20,
+                9000,
+                3000,
+                2000,
                 25,
                 new ArrayList<Sensor>(),
                 new ArrayList<String>());
@@ -62,7 +62,7 @@ public class RepoBootstrap implements Runnable {
                 120,
                 modelo,
                 new ArrayList<>(),
-                Status.CHRG);
+                Status.IDLE);
 
         // Adicionar ao repositório partilhado
         App.getInstance().Repos.droneRepo.repoList.add(drone1);
@@ -97,9 +97,9 @@ public class RepoBootstrap implements Runnable {
     private ArrayList<Point> genPointsList(int numOfPoints) {
         ArrayList<Point> points = new ArrayList<>();
         for (int i = 0; i < numOfPoints; i++) {
-            int latitude = (int) (Math.random() * 180) - 90; // Latitude range: -90 to 90
-            int longitude = (int) (Math.random() * 360) - 180; // Longitude range: -180 to 180
-            int altitude = (int) (Math.random() * 1000); // Altitude range: 0 to 999
+            int latitude = (int) 90 + 1*i; // Latitude range: -90 to 90
+            int longitude = (int) 90 + 1*i; // Longitude range: -180 to 180
+            int altitude = (int) 90 + 1*i; // Altitude range: 0 to 999
 
             Point point = new Point(latitude, altitude, longitude);
             points.add(point);

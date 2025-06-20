@@ -2,6 +2,7 @@ package org.lprog.domain.mission;
 
 import org.lprog.App;
 import org.lprog.domain.drone.Drone;
+import org.lprog.domain.model.Model;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -69,7 +70,7 @@ public class Mission {
         Point lastPoint = startingPoint;
 
         for (Point delivery : deliveries) {
-            totalDistance += lastPoint.distanceTo(delivery);
+            totalDistance += Point.distance3D(lastPoint, delivery);
             lastPoint = delivery;
         }
 
@@ -99,6 +100,80 @@ public class Mission {
             return null;
         }
     }
+
+    public double CalculateMissionLength() {
+        if (deliveries == null || deliveries.size() < 2) {
+            return 0.0;
+        }
+
+        double totalDistance = 0.0;
+
+        for (int i = 0; i < deliveries.size() - 1; i++) {
+            totalDistance += deliveries.get(i).distanceTo(deliveries.get(i + 1));
+        }
+
+        return totalDistance;
+    }
+
+    /**
+     *
+     * @return Mission duration in seconds
+     */
+    public double CalculateMissionDuration() {
+
+        Model model = App.getInstance().Repos.modelRepo.findByModelName(modelName);
+
+        if (model == null || startingPoint == null || deliveries == null || deliveries.isEmpty()) {
+            return 0.0;
+        }
+
+        double totalTime = 0.0;
+
+        // Velocidades em metros por segundo
+        double cruisingVelocity = model.CruisingVelocity;
+        double liftingVelocity = model.LiftingVelocity;
+        double landingVelocity = model.LandingVelocity;
+
+        Point current = startingPoint;
+
+        for (Point destination : deliveries) {
+            // 1. Fase de subida
+            double verticalLift = Math.max(0, destination.altitude - current.altitude);
+            totalTime += verticalLift / liftingVelocity;
+
+            // 2. Fase de cruzeiro (distância horizontal em metros)
+            double horizontalDistance = calculateHorizontalDistance(current, destination);
+            totalTime += horizontalDistance / cruisingVelocity;
+
+            // 3. Fase de descida
+            double verticalDrop = Math.max(0, current.altitude - destination.altitude);
+            totalTime += verticalDrop / landingVelocity;
+
+            // Atualiza o ponto atual
+            current = destination;
+        }
+
+        return totalTime; // tempo total em segundos
+    }
+
+
+
+    private double calculateHorizontalDistance(Point a, Point b) {
+        double latDiff = Math.toRadians(b.latitude - a.latitude);
+        double lonDiff = Math.toRadians(b.longitude - a.longitude);
+
+        double earthRadius = 6371e3; // Raio da Terra em metros
+
+        double h = Math.pow(Math.sin(latDiff / 2), 2) +
+                Math.cos(Math.toRadians(a.latitude)) * Math.cos(Math.toRadians(b.latitude)) *
+                        Math.pow(Math.sin(lonDiff / 2), 2);
+
+        double c = 2 * Math.atan2(Math.sqrt(h), Math.sqrt(1 - h));
+
+        return earthRadius * c; // distância horizontal em metros
+    }
+
+
 
     @Override
     public String toString() {
