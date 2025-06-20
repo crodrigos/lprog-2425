@@ -11,7 +11,9 @@ import org.lprog.domain.model.Model;
 import org.lprog.grammar.drone.*;
 import org.lprog.ui.utils.ConsoleUtils.ConsoleUtils;
 import org.lprog.ui.utils.ConsoleUtils.MenuOption;
+import org.lprog.ui.utils.FileDialog;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.PrintWriter;
@@ -36,8 +38,9 @@ public class DroneUI implements Runnable {
 
     private void carregarFrotaMenu() {
         System.out.print("Caminho do ficheiro: ");
-        String path = scanner.nextLine();
-        carregarFrotaDeFicheiro(path);
+        FileDialog fileDialog = new FileDialog();
+        File file = fileDialog.getFile();
+        carregarFrotaDeFicheiro(file.getAbsolutePath());
     }
 
     private void exportarFrotaMenu() {

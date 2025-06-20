@@ -12,7 +12,9 @@ import org.lprog.repo.mission.MissionRepo;
 import org.lprog.repo.model.ModelRepo;
 import org.lprog.ui.utils.ConsoleUtils.ConsoleUtils;
 import org.lprog.ui.utils.ConsoleUtils.MenuOption;
+import org.lprog.ui.utils.FileDialog;
 
+import java.io.File;
 import java.io.PrintWriter;
 import java.util.*;
 
@@ -64,8 +66,9 @@ public class MissionUI implements Runnable {
     }
 
     private void loadMissionsMenu() {
-        String path = ConsoleUtils.readLineFromConsole("Caminho do ficheiro: ");
-        loadMissionsFromFile(path);
+        FileDialog fileDialog = new FileDialog();
+        File file = fileDialog.getFile();
+        loadMissionsFromFile(file.getAbsolutePath());
     }
 
     private void exportMissionsMenu() {
