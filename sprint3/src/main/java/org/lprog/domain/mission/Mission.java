@@ -92,6 +92,11 @@ public class Mission {
         return status;
     }
 
+    public String getFormatedDate () {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd,HH:mm");
+        return formatter.format(startDate);
+    }
+
     public String estimateMissionTotalTime () {
         return null;
     }
@@ -184,12 +189,21 @@ public class Mission {
     public String toString() {
         return "\nMission {" +
                 "\n  ID: " + id +
-                "\n  Starting Date: " + startDate +
+                "\n  Starting Date: " + getFormatedDate() +
                 "\n  Model: " + (modelName != null ? modelName : "No model assigned") +
                 "\n  Drone: " + (drone != null ? drone.serialNumber : "No drone assigned") +
                 "\n  Starting Point: " + startingPoint +
                 "\n  Status: " + status +
                 "\n  Deliveries: [" + deliveries + "]" +
+                "\n}";
+    }
+
+    public String toFile() {
+        return "\nmission: {" +
+                "\n   STT: " + getFormatedDate() + ";" +
+                "\n   MD: " + modelName + ";" +
+                "\n   STP: " + startingPoint + ";" +
+                "\n   deliveries: [" + deliveries + "]" + ";" +
                 "\n}";
     }
 }

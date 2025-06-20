@@ -72,8 +72,9 @@ public class MissionUI implements Runnable {
     }
 
     private void exportMissionsMenu() {
-        String fileName = ConsoleUtils.readLineFromConsole("Nome do ficheiro destino: ");
-        exportMissionsToFile(fileName);
+        FileDialog fileDialog = new FileDialog();
+        File file = fileDialog.getFile();
+        exportMissionsToFile(file.getAbsolutePath());
     }
 
     private void loadMissionsFromFile(String filePath) {
@@ -98,7 +99,7 @@ public class MissionUI implements Runnable {
                 return;
             }
             for (Mission mission : missions) {
-                writer.println(mission.toString());
+                writer.println(mission.toFile());
             }
             ConsoleUtils.printMessage("Missões exportadas com sucesso para " + fileName);
         } catch (Exception e) {
