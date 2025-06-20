@@ -75,9 +75,9 @@ public class MissionVisitorImpl implements MissionVisitor {
         String[] coordinates = rawText.split(",");
         if (coordinates.length == 3) {
             try {
-                int latitude = Integer.parseInt(coordinates[0].trim());
-                int altitude = Integer.parseInt(coordinates[1].trim());
-                int longitude = Integer.parseInt(coordinates[2].trim());
+                double latitude = Double.parseDouble(coordinates[0].trim());
+                double altitude = Double.parseDouble(coordinates[1].trim());
+                double longitude = Double.parseDouble(coordinates[2].trim());
                 this.startingPoint = new Point(latitude, altitude, longitude);
             } catch (NumberFormatException e) {
                 // Handle invalid number format
@@ -108,9 +108,9 @@ public class MissionVisitorImpl implements MissionVisitor {
                     numOfPointsSoFar++;
                     if (coordinates.length == 3) {
                         try {
-                            int latitude = Integer.parseInt(coordinates[0].trim());
-                            int altitude = Integer.parseInt(coordinates[1].trim());
-                            int longitude = Integer.parseInt(coordinates[2].trim());
+                            double latitude = Double.parseDouble(coordinates[0].trim());
+                            double altitude = Double.parseDouble(coordinates[1].trim());
+                            double longitude = Double.parseDouble(coordinates[2].trim());
                             Point newPoint = new Point(latitude, altitude, longitude);
                             this.deliveries.add(newPoint);
                         } catch (NumberFormatException e) {
