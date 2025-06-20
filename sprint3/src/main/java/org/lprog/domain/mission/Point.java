@@ -3,9 +3,9 @@ package org.lprog.domain.mission;
 public class Point {
     public double latitude;
     public double longitude;
-    public int altitude;
+    public double altitude;
 
-    public Point(double latitude, double longitude, int altitude) {
+    public Point(double latitude, double longitude, double altitude) {
         this.latitude = latitude;
         this.longitude = longitude;
         this.altitude = altitude;
@@ -27,7 +27,7 @@ public class Point {
         this.longitude = longitude;
     }
 
-    public int getAltitude() {
+    public double getAltitude() {
         return altitude;
     }
 

@@ -1,0 +1,9 @@
+
+Mission {
+  ID: 1
+  Starting Date: Sun Jul 27 09:37:00 WEST 2025
+  Model: FX-001
+  Drone: No drone assigned
+  Starting Point: (40.0, 50.0, -74)
+  Deliveries: [[(90.0, 90.0, 90), (91.0, 91.0, 91), (92.0, 92.0, 92), (93.0, 93.0, 93), (94.0, 94.0, 94), (95.0, 95.0, 95)]]
+}

@@ -170,7 +170,7 @@ public class MissionUI implements Runnable {
 
             Model m = modelRepo.findByModelName(mission.modelName);
 
-            double missionLenght = mission.CalculateMissionLength();
+            double missionLenght = mission.getTotalDistance();
 
             if (m==null || m.Autonomy<missionLenght) {
 
@@ -196,7 +196,7 @@ public class MissionUI implements Runnable {
             }
         }
 
-        if (mission.startDate.compareTo(Calendar.getInstance().getTime())<0) {
+        if (mission.startDate.compareTo(Calendar.getInstance().getTime())>0) {
             ConsoleUtils.printMessage("A missão está marcada para executar na data " + mission.startDate.toString());
             List<String> opts = new ArrayList<>();
             opts.add("Sim");
@@ -205,17 +205,19 @@ public class MissionUI implements Runnable {
 
             if (i==1) return;
 
-            ConsoleUtils.printMessage("A procurar drone para executar missão...");
 
-            Model m = App.getInstance().Repos.modelRepo.findByModelName(mission.modelName);
-
-            Drone d = (Drone) ConsoleUtils.showAndSelectOne(searchAvailableDronesByModel(m), "Selecionar drone para executar");
-
-            mission.drone = d;
-            mission.setStatus(Status.Ongoing);
-            d.status = org.lprog.domain.drone.Status.FLYN;
 
         }
+
+        ConsoleUtils.printMessage("A procurar drone para executar missão...");
+
+        Model m = App.getInstance().Repos.modelRepo.findByModelName(mission.modelName);
+
+        Drone d = (Drone) ConsoleUtils.showAndSelectOne(searchAvailableDronesByModel(m), "Selecionar drone para executar");
+
+        mission.drone = d;
+        mission.setStatus(Status.Ongoing);
+        d.status = org.lprog.domain.drone.Status.FLYN;
     }
 
     private void updateMissionsAndDrones() {
@@ -269,7 +271,7 @@ public class MissionUI implements Runnable {
     private List<Model> searchModelsForMission(Mission mission) {
         ConsoleUtils.printMessage("A procurar possiveis modelos para executar missão...");
 
-        ConsoleUtils.printMessage("Distancia da missão" + mission.getTotalDistance());
+        ConsoleUtils.printMessage("Distancia da missão: " + mission.getTotalDistance());
 
         List<Model> goodModels = new ArrayList<>();
         App.getInstance().Repos.modelRepo.repoList.forEach(model -> {

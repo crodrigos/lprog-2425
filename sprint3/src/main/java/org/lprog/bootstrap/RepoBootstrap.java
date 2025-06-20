@@ -77,9 +77,9 @@ public class RepoBootstrap implements Runnable {
             "2025-07-27,09:37",
                 "FX-001",
                 new Point(
-                    40, // Latitude
-                        50, // Altitude
-                    -74// Longitude
+                    90, // Latitude
+                        90, // Altitude
+                    90// Longitude
                 ),
                 genPointsList(6)
 
@@ -97,9 +97,10 @@ public class RepoBootstrap implements Runnable {
     private ArrayList<Point> genPointsList(int numOfPoints) {
         ArrayList<Point> points = new ArrayList<>();
         for (int i = 0; i < numOfPoints; i++) {
-            int latitude = (int) 90 + 1*i; // Latitude range: -90 to 90
-            int longitude = (int) 90 + 1*i; // Longitude range: -180 to 180
-            int altitude = (int) 90 + 1*i; // Altitude range: 0 to 999
+
+            double latitude =  90 + 0.0001*i; // Latitude range: -90 to 90
+            double longitude =  90 + 0.0001*i; // Longitude range: -180 to 180
+            double altitude = 90 + 0.0001*i; // Altitude range: 0 to 999
 
             Point point = new Point(latitude, altitude, longitude);
             points.add(point);
