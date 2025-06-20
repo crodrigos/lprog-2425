@@ -186,6 +186,8 @@ public class MissionUI implements Runnable {
 
                 Model newModel = (Model) ConsoleUtils.showAndSelectOne(goodModels, "Selecionar novo modelo para executar missão");
 
+                if (newModel == null) {return;}
+
                 mission.modelName = newModel.ModelName;
             }
         }
@@ -196,6 +198,7 @@ public class MissionUI implements Runnable {
 
             if (!goodModels.isEmpty()) {
                 Model newModel = (Model) ConsoleUtils.showAndSelectOne(goodModels, "Selecionar novo modelo para executar missão");
+                if (newModel==null) {return;}
                 mission.modelName = newModel.ModelName;
             }
         }
